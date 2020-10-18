@@ -16,9 +16,9 @@ jobs:
           name: Install Dependencies
           command: npm install
       - persist_to_workspace:
-        paths:
-          - project
-        root: ~/
+          paths:
+            - project
+          root: ~/
       - save_cache:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
           paths:
