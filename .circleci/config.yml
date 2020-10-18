@@ -33,7 +33,7 @@ jobs:
           at: ~/
       - run:
           name: Prettier formatting
-          command: npm run prettify ./**/*.js ./**/*.jsx
+          command: npm run prettify .
 
   Linting:
     docker:
