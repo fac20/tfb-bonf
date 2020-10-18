@@ -21,7 +21,7 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: run tests and generate coverage report
+          name: Run tests and generate coverage report
           command: npm run coverage
       - codecov/upload:
           file: './coverage/clover.xml'
