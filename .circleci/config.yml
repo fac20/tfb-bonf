@@ -96,8 +96,8 @@ workflows:
           requires:
             - Installs
       - Test-Coverage:
-        requires:
-          - Installs
+          requires:
+            - Installs
       - Build-and-Deploy:
           requires:
             - Installs
