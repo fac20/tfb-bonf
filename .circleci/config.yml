@@ -43,7 +43,7 @@ jobs:
           at: ~/
       - run:
           name: ESLint fixes
-          command: npm run lint ./**/*.js ./**/*.jsx
+          command: npm run lint .
 
   Tests:
     docker:
