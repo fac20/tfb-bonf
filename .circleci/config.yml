@@ -3,8 +3,8 @@ orbs:
   codecov: codecov/codecov@1.0.2
 
 jobs:
-  # Download and cache dependencies
-  installs:
+  # Download, install and cache dependencies
+  Installs:
     docker:
       - image: circleci/node:14.5.0
     steps:
@@ -23,8 +23,39 @@ jobs:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
           paths:
             - ~/project/node_modules
-  # Run checks
-  checks:
+
+  # Checks
+  Formatting:
+    docker:
+      - image: circleci/node:14.5.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Prettier formatting
+          command: npx prettier --write ./src/**/*.js ./src/**/*.jsx
+
+  Linting:
+    docker:
+      - image: circleci/node:14.5.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: ESLint fixes
+          command: npx eslint --fix ./src/**/*.js ./src/**/*.jsx
+
+  Tests:
+    docker:
+      - image: circleci/node:14.5.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run tests
+          command: npm test -- --watchAll=false
+
+  Test-Coverage:
     docker:
       - image: circleci/node:14.5.0
     steps:
@@ -36,8 +67,9 @@ jobs:
       - codecov/upload:
           file: './coverage/clover.xml'
           token: c3cd2ffc-bdeb-4d78-8f66-2a70cec6fe8c
+
   # Build and deploy
-  build:
+  Build-and-Deploy:
     docker:
       - image: circleci/node:14.5.0
     steps:
@@ -53,10 +85,22 @@ jobs:
 workflows:
   push:
     jobs:
-      - installs
-      - checks:
+      - Installs
+      - Linting:
           requires:
-            - installs
-      - build:
+            - Installs
+      - Formatting:
           requires:
-            - installs
+            - Installs
+      - Tests:
+          requires:
+            - Installs
+      - Test-Coverage:
+        requires:
+          - Installs
+      - Build-and-Deploy:
+          requires:
+            - Installs
+            - Linting
+            - Formatting
+            - Tests
