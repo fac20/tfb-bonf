@@ -1,60 +1,60 @@
 version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.2
-  
+
 jobs:
   # Download and cache dependencies
   installs:
     docker:
-    - image: circleci/node:14.5.0
+      - image: circleci/node:14.5.0
     working_directory: ~/repo
     steps:
-    - checkout
-    - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-    - run:
-        name: Install Dependencies
-        command: npm install
-    - save_cache:
-        key: v1-npm-deps-{{ checksum "package-lock.json" }}
-        paths:
-          - ./node_modules
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
   # Run checks
   checks:
     docker:
-    - image: circleci/node:14.5.0
+      - image: circleci/node:14.5.0
     steps:
-    - attach_workspace:
-        at: ~/repo
-    - run:
-        name: Run tests and generate coverage report
-        command: npm run coverage
-    - codecov/upload:
-        file: './coverage/clover.xml'
-        token: c3cd2ffc-bdeb-4d78-8f66-2a70cec6fe8c
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Run tests and generate coverage report
+          command: npm run coverage
+      - codecov/upload:
+          file: './coverage/clover.xml'
+          token: c3cd2ffc-bdeb-4d78-8f66-2a70cec6fe8c
   # Build and deploy
   build:
     docker:
-    - image: circleci/node:14.5.0
+      - image: circleci/node:14.5.0
     steps:
-    - attach_workspace:
-        at: ~/repo
-    - run:
-        name: Build
-        command: npm run build
-    - run:
-        name: Firebase Deploy
-        command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --only hosting
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Firebase Deploy
+          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --only hosting
 
 workflows:
   push:
     jobs:
-    - installs
-    - checks:
-        requires:
-        - installs
-    - build:
-        requires:
-        - installs
+      - installs
+      - checks:
+          requires:
+            - installs
+      - build:
+          requires:
+            - installs
