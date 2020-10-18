@@ -11,7 +11,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: Install Dependencies
           command: npm install
@@ -33,7 +33,7 @@ jobs:
           at: ~/
       - run:
           name: Prettier formatting
-          command: npx prettier --write ./src/**/*.js ./src/**/*.jsx
+          command: npm run prettify ./**/*.js ./**/*.jsx
 
   Linting:
     docker:
@@ -43,7 +43,7 @@ jobs:
           at: ~/
       - run:
           name: ESLint fixes
-          command: npx eslint --fix ./src/**/*.js ./src/**/*.jsx
+          command: npx run lint ./**/*.js ./**/*.jsx
 
   Tests:
     docker:
@@ -99,6 +99,11 @@ workflows:
           requires:
             - Installs
       - Build-and-Deploy:
+          filters:
+            branches:
+              only:
+                - main
+                - master
           requires:
             - Installs
             - Linting

@@ -15,7 +15,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "coverage": "npm test -- --coverage --watchAll=false"
+    "coverage": "npm test -- --coverage --watchAll=false",
+    "lint": "eslint --fix",
+    "prettify": "prettier --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,7 +47,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint --fix",
-    "*.{js,jsx,json,ts,tsx,md,html,css}": "prettier --write"
+    "*.{js,jsx}": "npm run lint",
+    "*.{js,jsx,json,ts,tsx,md,html,css}": "npm run prettify"
   }
 }
