@@ -2,27 +2,86 @@ import React from 'react';
 import { db } from '../../connection.js';
 
 export default function NewLessonForm() {
+  const [formData, setFormData] = React.useState({});
+
+  const changeData = (event) => {
+    setFormData({
+      student: event.target.elements.student.value,
+      title: event.target.elements.title.value,
+      date: event.target.elements.date.value,
+      time: event.target.elements.time.value,
+      level: event.target.elements.level.value,
+      skills: {
+        reading: event.target.elements.reading.checked,
+        writing: event.target.elements.writing.checked,
+        listening: event.target.elements.listening.checked,
+        speaking: event.target.elements.speaking.checked,
+        grammar: event.target.elements.grammar.checked,
+      },
+      link: event.target.elements.link.value,
+    });
+  };
+  const submitData = (event) => {
+    event.preventDefault();
+    changeData(event);
+  };
+
+  React.useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   return (
-    <>
-      <form>
-        <label htmlFor="student">Student</label>
-        <input type="text" id="student" />
-        <label htmlFor="title">Lesson Title</label>
-        <input type="text" id="title" />
-        <label htmlFor="date">Date</label>
-        <input type="date" id="date" />
-        <label htmlFor="time">Time</label>
-        <input type="time" id="time" />
-        <label htmlFor="level">Level</label>
-        <input type="text" id="level" />
-        <label htmlFor="skills">Skills</label>
-        <input type="text" id="skills" />
-        <label htmlFor="">Document link</label>
-        <input type="url" id="doc-link" />
-        <input type="checkbox" id="add-resource" />
-        <label htmlFor="add-resource">Add to Resources</label>
-        <button type="submit"> Add New Lesson</button>
-      </form>
-    </>
+    <form onSubmit={submitData}>
+      <label htmlFor="student">Student</label>
+      <input type="text" name="student" id="student" />
+      <label htmlFor="title">Lesson Title</label>
+      <input type="text" name="title" id="title" />
+      <label htmlFor="date">Date</label>
+      <input type="date" name="date " id="date" />
+      <label htmlFor="time">Time</label>
+      <input type="time" name="time" id="time" />
+      <label htmlFor="level">Select a level:</label>
+      <select id="level" name="level">
+        <option value="a1">A1</option>
+        <option value="a2">A2</option>
+        <option value="a2/b1">A2/B1</option>
+        <option value="b1">B1</option>
+        <option value="b2">B2</option>
+        <option value="b2/c1">B2/C1</option>
+        <option value="c1">C1</option>
+        <option value="c2">C2</option>
+      </select>
+      <fieldset>
+        <legend>Skills</legend>
+        <input type="checkbox" name="reading" id="reading" />
+        <label htmlFor="reading">Reading</label>
+        <input type="checkbox" name="writing" id="writing" />
+        <label htmlFor="writing">Writing</label>
+        <input type="checkbox" name="speaking" id="speaking" />
+        <label htmlFor="speaking">Speaking</label>
+        <input type="checkbox" name="listening" id="listening" />
+        <label htmlFor="listening">Listening</label>
+        <input type="checkbox" name="grammar" id="grammar" />
+        <label htmlFor="grammar">Grammar</label>
+      </fieldset>
+      <label htmlFor="">Document link</label>
+      <input type="url" name="link" id="doc-link" />
+      <input type="checkbox" id="add-resource" />
+      <label htmlFor="add-resource">Add to Resources</label>
+      <button type="submit"> Add New Lesson</button>
+    </form>
   );
 }
+
+// db.collection('student')
+//   .where('name', '==', `${formData.student}`)
+//   .collection('lessons')
+//   .doc()
+//   .set({
+//     date: 'formData.date',
+//     time: 'formData.time',
+//     title: 'formData.title',
+//     level: 'formData.level',
+//     skills: 'formData.skills',
+//     link: 'formData.title',
+//   });

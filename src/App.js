@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import NewLessonForm from './components/NewLessonForm/NewLessonForm.jsx';
 import './App.css';
 
