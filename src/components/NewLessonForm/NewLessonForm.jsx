@@ -26,7 +26,13 @@ export default function NewLessonForm() {
     changeData(event);
   };
 
+  const isFirstRun = React.useRef(true);
+
   React.useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     console.log(formData);
   }, [formData]);
 
