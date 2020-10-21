@@ -68,7 +68,7 @@ const FormInput = styled.input`
   left: 0;
   width: 100%;
   border: 1px solid #111;
-  background: transparent;
+  background: white;
   padding: 10px;
   border-radius: 4px;
   box-sizing: border-box;
