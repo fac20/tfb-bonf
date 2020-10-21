@@ -34,6 +34,49 @@ export default function NewLessonForm() {
       return;
     }
     console.log(formData);
+    //potential issue, can't allow tutors to write student's name.
+
+    // db.collection('students')
+    // .where('name', '==', `${formData.student}`)
+    // .collection('lessons')
+    // .doc()
+    // .set({
+    //   date: formData.date,
+    //   time: formData.time,
+    //   title: formData.title,
+    //   level: formData.level,
+    //   skills: formData.skills,
+    //   link: formData.title,
+    // });
+    let ID;
+
+    db.collection('students')
+      .where('name', '==', formData.student)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.data())
+          ID = doc.id;
+        });
+      })
+      .then(() => {
+        db.collection('students')
+          .doc(ID)
+          .collection('lessons')
+          .doc(`${formData.date} ${formData.time}`)
+          .set({
+            date: formData.date,
+            time: formData.time,
+            title: formData.title,
+            level: formData.level,
+            skills: formData.skills,
+            link: formData.link,
+          });
+      });
+
+    //.collection('lessons').add(formData).then(docref => console.log("written WITH ID ", docref.id)).catch(err => console.err)
+
+    // when we have 2 people with same names, .where is going to find 2 documnets. How do we solve it?
   }, [formData]);
 
   return (
@@ -78,16 +121,3 @@ export default function NewLessonForm() {
     </form>
   );
 }
-
-// db.collection('student')
-//   .where('name', '==', `${formData.student}`)
-//   .collection('lessons')
-//   .doc()
-//   .set({
-//     date: 'formData.date',
-//     time: 'formData.time',
-//     title: 'formData.title',
-//     level: 'formData.level',
-//     skills: 'formData.skills',
-//     link: 'formData.title',
-//   });
