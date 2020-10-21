@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Button } from './Button';
 import './sidebar.css';
 
 export const Sidebar = ({}) => {
-  const [sidebarVisible, setSidebarVisible] = React.useState(true);
+  const [sidebarWidth, setSidebarWidth] = React.useState('20vw');
   const onLogout = () => {};
-  //   document.getElementById("mySidebar").style.width = "0";
-  // document.getElementById("main").style.marginLeft = "0";
-  const collapse = () => {};
+  const collapse = () => setSidebarWidth('0');
   return (
-    <nav style={`width: `}>
+    <nav style={{ width: sidebarWidth }}>
       <a href="javascript:void(0)" className="closebtn" onClick={collapse}>
         &times;
       </a>
