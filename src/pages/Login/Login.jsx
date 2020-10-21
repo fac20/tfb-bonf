@@ -6,15 +6,10 @@ import {
   logo768,
   logo1024,
   logoOriginal,
-} from './../../assets/images';
-// import logo from './../../assets/images/logo/Logo.png';
+} from '../../assets/images';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import './login.css';
-
-// const Logo = styled.img`
-// <Fade left/>
-// `;
 
 const GreenSquare = styled.div`
   background-color: hsl(115, 55%, 68%);
@@ -58,7 +53,6 @@ const Label = styled.label`
   display: inline-block;
   font-size: 16px;
   color: #111;
-
   transition: 0.5s;
   pointer-events: none;
 `;
