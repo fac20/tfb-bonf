@@ -1,4 +1,5 @@
 import React from 'react';
+// import NewLessonForm from './components/NewLessonForm/NewLessonForm.jsx';
 // import Lessons from './pages/Lessons/Lessons.jsx';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { auth } from './connection.js';
