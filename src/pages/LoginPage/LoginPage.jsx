@@ -173,7 +173,6 @@ const SubmitButton = styled.button`
   font-family: 'Montserrat', sans-serif;
   background-color: hsl(208, 99%, 69%);
   color: hsl(140, 100%, 100%);
-  border: 3px solid #fff;
   border: none;
   box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.5);
   max-width: 120px;
