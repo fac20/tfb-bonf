@@ -1,15 +1,21 @@
 import React from 'react';
-
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginPage from './pages/Login/Login.jsx';
+import HomePage from './pages/HomePage/HomePage.jsx';
 import { Sidebar } from './components/sidebar/Sidebar.jsx';
 
 function App() {
   return (
-    <div className="App">
-      {/* <Sidebar /> */}
-      <LoginPage />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact>
+          <LoginPage />
+        </Route>
+        <Route path="/home">
+          <HomePage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
