@@ -9,7 +9,6 @@ import {
 } from '../../assets/images';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
-import './login.css';
 import logIn from '../../utils/logIn.js';
 
 const LoginPage = () => {
@@ -20,8 +19,8 @@ const LoginPage = () => {
   const [password, setPassword] = React.useState('');
 
   return (
-    <main>
-      <section>
+    <Main>
+      <Section>
         <GreenSquare>
           <Fade left>
             <WhiteSquare>
@@ -37,7 +36,7 @@ const LoginPage = () => {
             </WhiteSquare>
           </Fade>
         </GreenSquare>
-      </section>
+      </Section>
 
       <LoginForm
         onSubmit={(event) => {
@@ -52,6 +51,7 @@ const LoginPage = () => {
             id="email"
             onChange={(event) => setEmail(event.target.value)}
             required
+            placeholder=" "
           />
           <Label htmlFor="email">E-mail</Label>
         </InputBox>
@@ -61,6 +61,7 @@ const LoginPage = () => {
             id="password"
             onChange={(event) => setPassword(event.target.value)}
             required
+            placeholder=" "
           />
           <Label htmlFor="password">Password</Label>
         </InputBox>
@@ -72,12 +73,26 @@ const LoginPage = () => {
           <a href="https://opportutoring.com/">Apply to be a tutor here.</a>
         </Subtitle>
       </LoginForm>
-    </main>
+    </Main>
   );
 };
 
 export default LoginPage;
 
+const Main = styled.main`
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100vh;
+`;
+
+const Section = styled.section`
+  margin-right: 75px;
+  margin-bottom: 20px;
+`;
 const GreenSquare = styled.div`
   background-color: hsl(115, 55%, 68%);
   height: min-content;
@@ -100,7 +115,7 @@ const LoginForm = styled.form`
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  box-shadow: 0 5px 25px hsl(208, 99%, 69%);
+  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
   background: hsl(115, 55%, 68%);
 `;
 
@@ -109,17 +124,14 @@ const Title = styled.h1`
   line-height: 1em;
   padding-left: 10px;
   border-left: 5px solid hsl(208, 99%, 69%);
-  font-weight: bold;
+  font-size: 40px;
 `;
 const Label = styled.label`
-  font-weight: 300;
   position: absolute;
   top: 1px;
   left: 1px;
   padding: 10px;
   display: inline-block;
-  font-size: 16px;
-  color: #111;
   transition: 0.5s;
   pointer-events: none;
 `;
@@ -128,19 +140,21 @@ const FormInput = styled.input`
   top: 0;
   left: 0;
   width: 100%;
-  border: 1px solid #111;
-  background: transparent;
+  border: 2px solid #111;
+  background: hsl(140, 100%, 100%);
   padding: 10px;
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 16px;
-  color: #111;
-  font-weight: 300;
   &:focus ~ ${Label} {
     transform: translateX(-10px) translateY(-32px);
     font-size: 12px;
   }
   &:valid ~ ${Label} {
+    transform: translateX(-10px) translateY(-32px);
+    font-size: 12px;
+  }
+  &:not(:placeholder-shown) ~ ${Label} {
     transform: translateX(-10px) translateY(-32px);
     font-size: 12px;
   }
@@ -156,20 +170,21 @@ const InputBox = styled.div`
 const SubmitButton = styled.button`
   font-family: 'Montserrat', sans-serif;
   background-color: hsl(208, 99%, 69%);
-  color: #fff;
+  color: hsl(140, 100%, 100%);
+  border: 3px solid #fff;
   border: none;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.5);
   max-width: 120px;
   cursor: pointer;
   padding: 10px;
   border-radius: 4px;
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 25px;
+  font-weight: 900;
   &:hover {
     background: #e91563;
   }
 `;
 
 const Subtitle = styled.p`
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0px 20px 20px 20px;
 `;
