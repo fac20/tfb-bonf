@@ -1,7 +1,7 @@
 import React from 'react';
 import './sidebar.css';
 
-export const Sidebar = () => {
+const Sidebar = () => {
   const [sidebarWidth, setSidebarWidth] = React.useState('20vw');
   const onLogout = () => {};
   const collapse = () => setSidebarWidth('0');
@@ -28,3 +28,5 @@ export const Sidebar = () => {
 //   Sidebar.defaultProps = {
 //     user: null,
 //   };
+
+export default Sidebar;
