@@ -35,6 +35,7 @@ export default function NewLessonForm() {
     }
     console.log(formData);
     //potential issue, can't allow tutors to write student's name.
+    // when we have 2 people with same names, .where is going to find 2 documnets. How do we solve it?
 
     // db.collection('students')
     // .where('name', '==', `${formData.student}`)
@@ -48,7 +49,14 @@ export default function NewLessonForm() {
     //   skills: formData.skills,
     //   link: formData.title,
     // });
+
+    //London.Omar.Aishah.red
+
     let ID;
+    //have function to pull user from local storage auth. Match tutor user to student. Get student "ID".
+    //stringent requirements for users to
+
+    //given tutor username, find the student they are associated with
 
     db.collection('students')
       .where('name', '==', formData.student)
@@ -75,8 +83,6 @@ export default function NewLessonForm() {
       });
 
     //.collection('lessons').add(formData).then(docref => console.log("written WITH ID ", docref.id)).catch(err => console.err)
-
-    // when we have 2 people with same names, .where is going to find 2 documnets. How do we solve it?
   }, [formData]);
 
   return (
