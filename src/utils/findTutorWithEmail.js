@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { db } from './../connection.js';
 
 //function which takes in email addres of person logged in

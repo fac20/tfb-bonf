@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "coverage": "npm test -- --coverage --watchAll=false",
-    "lint": "eslint --fix",
+    "lint": "eslint --fix --max-warnings 0",
     "prettify": "prettier --write",
     "cz": "cz"
   },
