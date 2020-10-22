@@ -165,6 +165,8 @@ const InputBox = styled.div`
   width: 300px;
   height: 46px;
   margin-bottom: 35px;
+  display: flex;
+  justify-content: center;
 `;
 
 const SubmitButton = styled.button`
