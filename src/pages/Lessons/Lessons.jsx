@@ -1,10 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const Lessons = () => {
   return (
     <>
       <h2>Tutee's Lessons</h2>
-      <div>
+      <LessonsWrapper>
         <h3>Upcoming</h3>
         <table border="1px 1px solid">
           <tr>
@@ -55,9 +56,16 @@ const Lessons = () => {
             <td>Alex</td>
           </tr>
         </table>
-      </div>
+      </LessonsWrapper>
     </>
   );
 };
 
 export default Lessons;
+
+const LessonsWrapper = styled.div`
+  border-radius: 20px;
+  background-color: hsl(172, 87%, 91%);
+  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
+  width: fit-content;
+`;
