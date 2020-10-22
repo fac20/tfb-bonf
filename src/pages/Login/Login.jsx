@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   logo150,
   logo256,
@@ -6,15 +6,77 @@ import {
   logo768,
   logo1024,
   logoOriginal,
-} from './../../assets/images';
-// import logo from './../../assets/images/logo/Logo.png';
+} from '../../assets/images';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import './login.css';
+import logIn from '../../utils/logIn.js';
 
-// const Logo = styled.img`
-// <Fade left/>
-// `;
+const LoginPage = () => {
+  //TODO:
+  //small logo - decide if including [A say no]
+  //login form - style, make accessible, action
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  return (
+    <main>
+      <section>
+        <GreenSquare>
+          <Fade left>
+            <WhiteSquare>
+              <figure>
+                <img
+                  src={logo768}
+                  alt="Opportutoring logo of a globe surrounded by a blue circle"
+                  loading="lazy"
+                  srcset={`${logo150} 150w, ${logo300} 300w, ${logo768} 768w, ${logo1024} 1024w, ${logo256} 256w, ${logoOriginal} 1034w`}
+                  sizes="(max-width: 100%) 100vw, 300px"
+                />
+              </figure>
+            </WhiteSquare>
+          </Fade>
+        </GreenSquare>
+      </section>
+
+      <LoginForm
+        onSubmit={(event) => {
+          event.preventDefault();
+          logIn(email, password);
+        }}
+      >
+        <Title>Log in</Title>
+        <InputBox>
+          <FormInput
+            type="email"
+            id="email"
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+          <Label htmlFor="email">E-mail</Label>
+        </InputBox>
+        <InputBox>
+          <FormInput
+            type="password"
+            id="password"
+            onChange={(event) => setPassword(event.target.value)}
+            required
+          />
+          <Label htmlFor="password">Password</Label>
+        </InputBox>
+        <InputBox>
+          <SubmitButton type="submit">Log in</SubmitButton>
+        </InputBox>
+        <Subtitle>
+          New to the platform?{' '}
+          <a href="https://opportutoring.com/">Apply to be a tutor here.</a>
+        </Subtitle>
+      </LoginForm>
+    </main>
+  );
+};
+
+export default LoginPage;
 
 const GreenSquare = styled.div`
   background-color: hsl(115, 55%, 68%);
@@ -58,7 +120,6 @@ const Label = styled.label`
   display: inline-block;
   font-size: 16px;
   color: #111;
-
   transition: 0.5s;
   pointer-events: none;
 `;
@@ -112,52 +173,3 @@ const Subtitle = styled.p`
   padding-left: 15px;
   padding-right: 15px;
 `;
-const LoginPage = () => {
-  //TODO
-  //small logo - decide if including [A say no]
-  //big logo - add srcset for responsiveness, include animation from original webpage
-  //login form - style, make accessible, action
-
-  return (
-    <main>
-      <section>
-        <GreenSquare>
-          <Fade left>
-            <WhiteSquare>
-              <figure>
-                <img
-                  src={logo768}
-                  alt="Opportutoring logo of a globe surrounded by a blue circle"
-                  loading="lazy"
-                  srcset={`${logo150} 150w, ${logo300} 300w, ${logo768} 768w, ${logo1024} 1024w, ${logo256} 256w, ${logoOriginal} 1034w`}
-                  sizes="(max-width: 100%) 100vw, 300px"
-                />
-              </figure>
-            </WhiteSquare>
-          </Fade>
-        </GreenSquare>
-      </section>
-
-      <LoginForm>
-        <Title>Log in</Title>
-        <InputBox>
-          <FormInput type="email" id="email" required />
-          <Label htmlFor="email">E-mail</Label>
-        </InputBox>
-        <InputBox>
-          <FormInput type="password" id="password" required />
-          <Label htmlFor="password">Password</Label>
-        </InputBox>
-        <InputBox>
-          <SubmitButton type="submit">Log in</SubmitButton>
-        </InputBox>
-        <Subtitle>
-          New to the platform?{' '}
-          <a href="https://opportutoring.com/">Apply to be a tutor here.</a>
-        </Subtitle>
-      </LoginForm>
-    </main>
-  );
-};
-
-export default LoginPage;
