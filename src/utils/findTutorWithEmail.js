@@ -7,16 +7,18 @@ import { db } from './../connection.js';
 // go within doc to find name of student and return object with student and team members
 
 const findTutorWithEmail = (emailaddress) => {
-  db.collection('tutors')
+  return db
+    .collection('tutors')
     .where('email', '==', emailaddress)
     .get()
     .then((querySnapshot) => {
+      let tutorData;
       querySnapshot.forEach((doc) => {
         console.log(doc.id, ' => ', doc.data(), doc.data().student);
-        return doc.data();
+        tutorData = doc.data();
       });
+      return tutorData;
     })
-    .then((data) => data)
     .catch(function (error) {
       console.log('Error getting document:', error);
     });

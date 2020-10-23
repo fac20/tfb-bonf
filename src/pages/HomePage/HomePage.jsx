@@ -1,11 +1,11 @@
 import React from 'react';
-// import findTutorWithEmail from './../../utils/findTutorWithEmail';
+import findTutorWithEmail from './../../utils/findTutorWithEmail';
 
 export default function HomePage() {
-  // console.log("homepagelog", findTutorWithEmail('hello@me.com'))
-  // findTutorWithEmail('hello@me.com').then(data => {
-  //   console.log(data); //undefined
-  // })
+  // console.log("homepagelog", findTutorWithEmail.resolve('hello@me.com'))
+  findTutorWithEmail('hello@me.com').then((data) => {
+    console.log('homepagethen', data); //works
+  });
 
   return (
     <div>
