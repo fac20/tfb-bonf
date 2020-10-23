@@ -52,7 +52,20 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
+
+The project can be accessed through this link: https://opportutoring-platform.web.app/.
+We have currently only enabled sign-ins as we only want admins to be allowed to create a new user.
+To explore the platform, sign in with the details below:
+username: hello@me.com
+password: 123456
+
+As of 23/10/2020, the login page and logging in capabilities are finished. However, the home page, and resources page are still blank.
+The add lesson form has been created and does add the lesson into our database, which can be viewed through the firebase console.
+We have hard-corded several values for testing purposes currently, however, they will be changed after we have set some other aspects up.
+
+### Known Bugs
+- you can still see the login page for a split second once it refreshes and you are already logged in, before transferring you to the home page
 
 
 
@@ -83,6 +96,8 @@ npm install
 <add info here>
 
 
+# STOP READING HERE, IGNORE BELOW 
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -92,14 +107,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 
 
-<!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/fac20/tfb-bonf/issues) for a list of proposed features (and known issues).
 
 
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -112,14 +125,14 @@ Contributions are what make the open source community such an amazing place to b
 
 
 
-<!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
-<!-- CONTACT -->
+
 ## Contact
 
 Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
@@ -128,14 +141,12 @@ Project Link: [https://github.com/fac20/tfb-bonf](https://github.com/fac20/tfb-b
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
+
 ## Acknowledgements
 
 * []()
 * []()
 * []()
-
-
 
 
 
