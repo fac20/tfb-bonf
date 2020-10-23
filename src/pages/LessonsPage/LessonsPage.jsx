@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Lessons = () => {
+const LessonsPage = () => {
   return (
     <>
       <h2>Tutee's Lessons</h2>
@@ -61,7 +61,7 @@ const Lessons = () => {
   );
 };
 
-export default Lessons;
+export default LessonsPage;
 
 const LessonsWrapper = styled.div`
   border-radius: 20px;
