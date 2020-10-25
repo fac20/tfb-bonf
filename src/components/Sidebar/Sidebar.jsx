@@ -15,7 +15,7 @@ const Sidebar = () => {
       <a href="/lessons">Lessons</a>
       <a href="/resources">Resources</a>
       <a href="/calendar">Calendar</a>
-      <a href="/links">Links</a>
+      <a href="/links">Useful Links</a>
       <LogoutButton onClick={logOut}>Logout</LogoutButton>
     </nav>
   );
