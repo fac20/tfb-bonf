@@ -27,7 +27,7 @@ const questions = [
   {
     type: 'input',
     name: 'message',
-    message: 'GitHub commit message (required):\n',
+    message: 'Commit message (required):\n',
     validate: validate.exists,
   },
   {
