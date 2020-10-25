@@ -61,10 +61,5 @@
     "*.{js,jsx,json,ts,tsx,md,html,css}": "npm run prettify"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "tfb-bonf@0.1.0",
-  "config": {
-    "commitizen": {
-      "path": "./.commitconfig/"
-    }
-  }
+  "_id": "tfb-bonf@0.1.0"
 }

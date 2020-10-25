@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { auth } from './connection.js';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
-import Sidebar from './components/sidebar/Sidebar.jsx';
+import Sidebar from './components/Sidebar/Sidebar.jsx';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);

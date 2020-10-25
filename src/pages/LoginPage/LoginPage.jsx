@@ -29,7 +29,7 @@ const LoginPage = () => {
                   src={logo768}
                   alt="Opportutoring logo of a globe surrounded by a blue circle"
                   loading="lazy"
-                  srcset={`${logo150} 150w, ${logo300} 300w, ${logo768} 768w, ${logo1024} 1024w, ${logo256} 256w, ${logoOriginal} 1034w`}
+                  srcSet={`${logo150} 150w, ${logo300} 300w, ${logo768} 768w, ${logo1024} 1024w, ${logo256} 256w, ${logoOriginal} 1034w`}
                   sizes="(max-width: 100%) 100vw, 300px"
                 />
               </figure>
@@ -53,7 +53,7 @@ const LoginPage = () => {
             required
             placeholder=" "
           />
-          <Label htmlFor="email">E-mail</Label>
+          <Label htmlFor="email">Email</Label>
         </InputBox>
         <InputBox>
           <FormInput
