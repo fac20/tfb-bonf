@@ -5,30 +5,34 @@ import styled from 'styled-components';
 const Sidebar = () => {
   const [sidebarWidth, setSidebarWidth] = React.useState('13rem');
   const collapse = () => setSidebarWidth('0');
+  const unfurl = () => setSidebarWidth('13rem');
   return (
-    <Nav style={{ width: sidebarWidth }}>
-      <CloseButton onClick={collapse}>&times;</CloseButton>
-      <UL>
-        <li>
-          <Anchor href="/">Home</Anchor>
-        </li>
-        <li>
-          <Anchor href="/lessons">Lessons</Anchor>
-        </li>
-        <li>
-          <Anchor href="/resources">Resources</Anchor>
-        </li>
-        <li>
-          <Anchor href="/calendar">Calendar</Anchor>
-        </li>
-        <li>
-          <Anchor href="/links">Useful Links</Anchor>
-        </li>
-        <li>
-          <LogoutButton onClick={logOut}>Logout</LogoutButton>
-        </li>
-      </UL>
-    </Nav>
+    <>
+      <OpenButton onClick={unfurl}>&equiv;</OpenButton>
+      <Nav style={{ width: sidebarWidth }}>
+        <CloseButton onClick={collapse}>&times;</CloseButton>
+        <UL>
+          <li>
+            <Anchor href="/">Home</Anchor>
+          </li>
+          <li>
+            <Anchor href="/lessons">Lessons</Anchor>
+          </li>
+          <li>
+            <Anchor href="/resources">Resources</Anchor>
+          </li>
+          <li>
+            <Anchor href="/calendar">Calendar</Anchor>
+          </li>
+          <li>
+            <Anchor href="/links">Useful Links</Anchor>
+          </li>
+          <li>
+            <LogoutButton onClick={logOut}>Logout</LogoutButton>
+          </li>
+        </UL>
+      </Nav>
+    </>
   );
 };
 
@@ -53,8 +57,8 @@ const LogoutButton = styled.button`
   padding: 0.5rem 1rem;
   margin: 1rem 0;
   border-radius: 10%;
-  font-size: 1.5em;
-  font-weight: 900;
+  font-size: 1em;
+  font-weight: 1000;
   &:hover {
     background: hsl(208, 99%, 69%);
   }
@@ -83,11 +87,20 @@ const CloseButton = styled.button`
   background-color: none;
 `;
 
+const OpenButton = styled.button`
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  font-size: 3rem;
+  color: hsl(0, 0%, 50.6%);
+  background-color: none;
+`;
+
 /* The sidebar links */
 const Anchor = styled.a`
   padding: 0.5rem 0;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 1.5em;
   color: hsl(0, 0%, 50.6%);
   display: block;
   transition: 0.3s;
