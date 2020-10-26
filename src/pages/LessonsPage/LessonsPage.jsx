@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import getAllLessons from './../../utils/getAllLessons';
 
 const LessonsPage = () => {
+  React.useEffect(() => {
+    getAllLessons('sam');
+  }, []);
+
   return (
     <>
       <h2>Tutee's Lessons</h2>

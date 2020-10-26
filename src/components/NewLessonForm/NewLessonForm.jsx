@@ -1,8 +1,14 @@
 import React from 'react';
 import { db } from '../../connection.js';
+import findStudentIDByName from './../../utils/findStudentIDByName';
 
 export default function NewLessonForm() {
   const [formData, setFormData] = React.useState({});
+
+  //we store the lesson's data in a state
+  //and update it inside the changeData function
+  //which gets called by submitData after preventing default
+  //when the form is submitted
 
   const changeData = (event) => {
     setFormData({
@@ -21,6 +27,7 @@ export default function NewLessonForm() {
       link: event.target.elements.link.value,
     });
   };
+
   const submitData = (event) => {
     event.preventDefault();
     changeData(event);
@@ -57,33 +64,22 @@ export default function NewLessonForm() {
     //stringent requirements for users to
 
     //given tutor username, find the student they are associated with
-
-    db.collection('students')
-      .where('name', '==', formData.student)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // console.log(doc.data())
-          ID = doc.id;
+    findStudentIDByName(formData.student).then((ID) => {
+      db.collection('students')
+        .doc(ID) //we use the ID variable to select the student's doc
+        .collection('lessons')
+        .doc(`${formData.date} ${formData.time}`) //if a lesson with this Id exits it will overwrite it, otherwise it will create it
+        //could potentially be overridden, so change to unique ID
+        .set({
+          date: formData.date,
+          time: formData.time,
+          title: formData.title,
+          level: formData.level,
+          skills: formData.skills,
+          link: formData.link,
         });
-      })
-      .then(() => {
-        db.collection('students')
-          .doc(ID)
-          .collection('lessons')
-          .doc(`${formData.date} ${formData.time}`)
-          .set({
-            date: formData.date,
-            time: formData.time,
-            title: formData.title,
-            level: formData.level,
-            skills: formData.skills,
-            link: formData.link,
-          });
-      });
-
-    //.collection('lessons').add(formData).then(docref => console.log("written WITH ID ", docref.id)).catch(err => console.err)
-  }, [formData]);
+    });
+  }, [formData]); //when formData changes React fires the effect (formData changes when setFormData is called inside changeData which is called by submitData)
 
   return (
     <form onSubmit={submitData}>
