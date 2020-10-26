@@ -8,12 +8,26 @@ const Sidebar = () => {
   return (
     <Nav style={{ width: sidebarWidth }}>
       <CloseButton onClick={collapse}>&times;</CloseButton>
-      <Anchor href="/">Home</Anchor>
-      <Anchor href="/lessons">Lessons</Anchor>
-      <Anchor href="/resources">Resources</Anchor>
-      <Anchor href="/calendar">Calendar</Anchor>
-      <Anchor href="/links">Useful Links</Anchor>
-      <LogoutButton onClick={logOut}>Logout</LogoutButton>
+      <UL>
+        <li>
+          <Anchor href="/">Home</Anchor>
+        </li>
+        <li>
+          <Anchor href="/lessons">Lessons</Anchor>
+        </li>
+        <li>
+          <Anchor href="/resources">Resources</Anchor>
+        </li>
+        <li>
+          <Anchor href="/calendar">Calendar</Anchor>
+        </li>
+        <li>
+          <Anchor href="/links">Useful Links</Anchor>
+        </li>
+        <li>
+          <LogoutButton onClick={logOut}>Logout</LogoutButton>
+        </li>
+      </UL>
     </Nav>
   );
 };
@@ -37,7 +51,7 @@ const LogoutButton = styled.button`
   max-width: 10rem;
   cursor: pointer;
   padding: 0.5rem 1rem;
-  margin: 1rem 2rem;
+  margin: 1rem 0;
   border-radius: 10%;
   font-size: 1.5em;
   font-weight: 900;
@@ -71,7 +85,7 @@ const CloseButton = styled.button`
 
 /* The sidebar links */
 const Anchor = styled.a`
-  padding: 8px 8px 8px 32px;
+  padding: 0.5rem 0;
   text-decoration: none;
   font-size: 25px;
   color: hsl(0, 0%, 50.6%);
@@ -81,6 +95,11 @@ const Anchor = styled.a`
   &:hover {
     color: #f1f1f1;
   }
+`;
+
+const UL = styled.ul`
+  margin: auto;
+  list-style-type: none;
 `;
 
 // @media screen and (max-height: 450px) {
