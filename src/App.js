@@ -6,7 +6,7 @@ import { auth } from './connection.js';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
-import ResourcesPage from './pages/ResourcesPage.jsx';
+import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -22,28 +22,30 @@ function App() {
   });
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact>
-          {loggedIn ? (
-            <>
-              <Sidebar />
-              <HomePage />
-            </>
-          ) : (
-            <LoginPage />
-          )}
-        </Route>
-        <Route path="/home">
-          <Sidebar />
-          <HomePage />
-        </Route>
-        <Route path="/resources">
-          <Sidebar />
-          <ResourcesPage />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <main>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact>
+            {loggedIn ? (
+              <>
+                <Sidebar />
+                <HomePage />
+              </>
+            ) : (
+              <LoginPage />
+            )}
+          </Route>
+          <Route path="/home">
+            <Sidebar />
+            <HomePage />
+          </Route>
+          <Route path="/resources">
+            <Sidebar />
+            <ResourcesPage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </main>
   );
 }
 
