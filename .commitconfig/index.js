@@ -11,17 +11,19 @@ const questions = [
   {
     type: 'input',
     name: 'type',
-    message: 'type (feat, fix, docs, refactor, chore) (optional)',
+    message: 'type (feat, fix, docs, refactor, chore) (required): ',
+    validate: validate.exists,
   },
   {
     type: 'input',
     name: 'scope',
-    message: 'scope (e.g. component or file name) (optional)',
+    message: 'scope (e.g. component or file name) (required): ',
+    validate: validate.exists,
   },
   {
     type: 'input',
-    name: 'jiraIssueNo',
-    message: 'Jira issue number (e.g. OP-40) (required)',
+    name: 'jiraIssueKey',
+    message: 'Jira issue key (e.g. OP-40) (required): ',
     validate: validate.exists,
   },
   {
@@ -37,14 +39,9 @@ const questions = [
   },
   {
     type: 'input',
-    name: 'closes',
-    message: 'Closes issue number (optional):\n',
-  },
-  {
-    type: 'input',
-    name: 'coauthorship',
+    name: 'coAuthorship', //only works for one co-author
     message:
-      'coauthor (Ai for Aishah, Az for Azizi, L for Lisa, J for Jihyun) (optional):\n',
+      'co-author (Ai for Aishah, Az for Azizi, L for Lisa, J for Jihyun) (optional): ',
   },
 ];
 
@@ -52,46 +49,40 @@ function formatCommit(commit, answers) {
   const {
     type,
     scope,
-    jiraIssueNo,
+    jiraIssueKey,
     message,
     time,
     closes,
-    coauthorship,
+    coAuthorship,
   } = answers;
   commit(
     [
       type && type + '',
       scope && '(' + scope + ')',
       ': ',
-      message && message + ' ',
-      jiraIssueNo && jiraIssueNo.toUpperCase(),
-      message && '\n\n Comments: #comment ' + message,
+      jiraIssueKey && jiraIssueKey.toUpperCase() + ' ',
+      message && '#comment ' + message,
       time && ' #time ' + time,
-      closes && ' #fixes' + closes,
-      coauthorship && parseCoauthor(coauthorship),
+      coAuthorship && '\n\n' + parseCoAuthor(coAuthorship),
     ]
       .filter((answer) => !!answer)
       .join('')
   );
 }
 
-function parseList(strList) {
-  return strList.split(/[ ,]+/).join(' #');
-}
-
-function parseCoauthor(coauthorship) {
+function parseCoAuthor(coAuthorship) {
   const beginning = '\nCo-authored-by: ';
   let ending;
-  if (coauthorship.toUpperCase() === 'AI') {
+  if (coAuthorship.toUpperCase() === 'AI') {
     ending = ' aissshah <aissshah@outlook.com>';
-  } else if (coauthorship.toUpperCase() === 'AZ') {
+  } else if (coAuthorship.toUpperCase() === 'AZ') {
     ending = 'Azizi-A <azizi.adeyemo@gmail.com>';
-  } else if (coauthorship.toUpperCase() === 'L') {
+  } else if (coAuthorship.toUpperCase() === 'L') {
     ending = 'LiCern <lisacernilogar@me.com>';
-  } else if (coauthorship.toUpperCase() === 'J') {
+  } else if (coAuthorship.toUpperCase() === 'J') {
     ending = 'Jihyun-Jang <jhjang742@gmail.com>';
   } else {
-    ending = coauthorship;
+    ending = coAuthorship;
   }
   return beginning + ending;
 }
