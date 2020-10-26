@@ -13,6 +13,7 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
       - run:
           name: Install Dependencies
           command: npm install
@@ -86,6 +87,7 @@ jobs:
 workflows:
   push:
     jobs:
+      - cypress/run
       - Installs
       - Linting:
           requires:
@@ -110,4 +112,3 @@ workflows:
             - Linting
             - Formatting
             - Tests
-      - cypress/run
