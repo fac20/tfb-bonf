@@ -17,9 +17,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
+    "test:coverage": "npm test -- --coverage --watchAll=false",
+    "cy:open": "cypress open",
+    "cy:report": "cypress run",
+    "cy:ci": "start-server-and-test start http://localhost:3000 cy:report",
     "eject": "react-scripts eject",
-    "coverage": "npm test -- --coverage --watchAll=false",
     "lint": "eslint --fix --max-warnings 0",
     "prettify": "prettier --write",
     "cz": "cz"
@@ -50,6 +53,7 @@
     "lint-staged": "^10.4.2",
     "prettier": "^2.1.2",
     "react-is": "^16.13.1",
+    "start-server-and-test": "^1.11.5",
     "transparent-commitizen": "^0.5.2"
   },
   "husky": {

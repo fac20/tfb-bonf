@@ -65,7 +65,7 @@ jobs:
           at: ~/
       - run:
           name: Run tests and generate coverage report
-          command: npm run coverage
+          command: npm run test:coverage
       - codecov/upload:
           file: './coverage/clover.xml'
           token: c3cd2ffc-bdeb-4d78-8f66-2a70cec6fe8c
