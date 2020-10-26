@@ -8,9 +8,9 @@ const Sidebar = () => {
   const collapse = () => setSidebarWidth('0');
   return (
     <nav style={{ width: sidebarWidth }}>
-      <a href="# " className="closebtn" onClick={collapse}>
+      <button className="closebtn" onClick={collapse}>
         &times;
-      </a>
+      </button>
       <a href="/">Home</a>
       <a href="/lessons">Lessons</a>
       <a href="/resources">Resources</a>
