@@ -1,23 +1,45 @@
 import React from 'react';
-import './sidebar.css';
 import logOut from '../../utils/logOut';
-import styled from 'styled-components';
+import {
+  Anchor,
+  CloseButton,
+  LogoutButton,
+  Nav,
+  OpenButton,
+  UL,
+} from './Sidebar.style';
 
 const Sidebar = () => {
-  const [sidebarWidth, setSidebarWidth] = React.useState('20vw');
+  const [sidebarWidth, setSidebarWidth] = React.useState('13rem');
   const collapse = () => setSidebarWidth('0');
+  const unfurl = () => setSidebarWidth('13rem');
   return (
-    <nav style={{ width: sidebarWidth }}>
-      <a href="# " className="closebtn" onClick={collapse}>
-        &times;
-      </a>
-      <a href="/">Home</a>
-      <a href="/lessons">Lessons</a>
-      <a href="/resources">Resources</a>
-      <a href="/calendar">Calendar</a>
-      <a href="/links">Useful Links</a>
-      <LogoutButton onClick={logOut}>Logout</LogoutButton>
-    </nav>
+    <>
+      <OpenButton onClick={unfurl}>&equiv;</OpenButton>
+      <Nav style={{ width: sidebarWidth }}>
+        <CloseButton onClick={collapse}>&times;</CloseButton>
+        <UL>
+          <li>
+            <Anchor href="/">Home</Anchor>
+          </li>
+          <li>
+            <Anchor href="/lessons">Lessons</Anchor>
+          </li>
+          <li>
+            <Anchor href="/resources">Resources</Anchor>
+          </li>
+          <li>
+            <Anchor href="/calendar">Calendar</Anchor>
+          </li>
+          <li>
+            <Anchor href="/links">Useful Links</Anchor>
+          </li>
+          <li>
+            <LogoutButton onClick={logOut}>Logout</LogoutButton>
+          </li>
+        </UL>
+      </Nav>
+    </>
   );
 };
 
@@ -31,33 +53,3 @@ const Sidebar = () => {
 //   };
 
 export default Sidebar;
-
-const LogoutButton = styled.button`
-  font-family: 'Montserrat', sans-serif;
-  background-color: #fff;
-  border: none;
-  box-shadow: 4px 4px 0 hsl(0, 0%, 50.588235294117645%);
-  max-width: 120px;
-  cursor: pointer;
-  padding: 10px;
-  margin: 2rem;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 900;
-  &:hover {
-    background: hsl(208, 99%, 69%);
-  }
-`;
-
-// const Nav = styled.nav`
-//   height: 100%; /* 100% Full-height */
-//   width: 0; /* 0 width - change this with JavaScript */
-//   position: fixed; /* Stay in place */
-//   z-index: 1; /* Stay on top */
-//   top: 0;
-//   left: 0;
-//   background-color: #111; /* Black*/
-//   overflow-x: hidden; /* Disable horizontal scroll */
-//   padding-top: 60px; /* Place content 60px from the top */
-//   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-// `;
