@@ -43,6 +43,10 @@ function App() {
             <Sidebar />
             <ResourcesPage />
           </Route>
+          <Route path="/resources/:level">
+            <Sidebar />
+            <ResourcesPage />
+          </Route>
         </Switch>
       </BrowserRouter>
     </main>
