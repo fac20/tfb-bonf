@@ -19,7 +19,8 @@ const LessonsPage = () => {
           lessons.push(doc.data());
         });
         return lessons;
-      });
+      })
+      .catch((err) => console.err('no lessons ye'));
   };
 
   React.useEffect(() => {
