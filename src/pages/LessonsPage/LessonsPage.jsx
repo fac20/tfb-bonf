@@ -16,11 +16,24 @@ const LessonsPage = () => {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          lessons.push(doc.data());
+          lessons.push(doc.data()); //lessons is an array, with each doc being an object
         });
-        return lessons;
-      })
-      .catch((err) => console.err('no lessons ye'));
+        return lessons.map((elem) => {
+          let skillsString = '';
+          if (elem.skills.reading) skillsString = 'Reading ';
+          if (elem.skills.writing) skillsString += 'Writing ';
+          if (elem.skills.listening) skillsString += 'Listening ';
+          if (elem.skills.speaking) skillsString += 'Speaking ';
+          if (elem.skills.grammar) skillsString += 'Grammar ';
+          // console.log(Object.fromEntries([['skillsString', skillsString]]))
+          // console.log(elem)
+          return Object.assign(
+            Object.fromEntries([['skillsString', skillsString]]),
+            elem
+          );
+        });
+      });
+    // .catch((err) => console.error('no lessons yet'));
   };
 
   React.useEffect(() => {
@@ -49,13 +62,16 @@ const LessonsPage = () => {
         Header: 'Level',
         accessor: 'level',
       },
-      // {
-      //   Header: 'Skills',
-      //   accessor: 'skills',
-      // },
+      {
+        Header: 'Skills',
+        accessor: 'skillsString', //add IELTS/TOEFL related
+      },
       {
         Header: 'Link',
         accessor: 'link',
+      },
+      {
+        Header: 'Tutor',
       },
     ],
     []
@@ -65,16 +81,23 @@ const LessonsPage = () => {
 
   return (
     <main>
-      {lessonsArray ? (
-        <Table columns={tableHeaders} data={lessonsArray} />
-      ) : (
-        <></>
-      )}
       <h2>Tutee's Lessons</h2>
       <LessonsWrapper>
         <h3>Upcoming</h3>
-
-        <button type="button">Add New Lesson</button>
+        {lessonsArray ? (
+          <Table columns={tableHeaders} data={lessonsArray} />
+        ) : (
+          <></>
+        )}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = '/new-lesson-form';
+          }}
+        >
+          Add New Lesson
+        </button>
         <button type="button">Add Homework</button>
         <h3>Past</h3>
       </LessonsWrapper>

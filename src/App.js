@@ -1,5 +1,5 @@
 import React from 'react';
-// import NewLessonForm from './components/NewLessonForm/NewLessonForm.jsx';
+import NewLessonForm from './components/NewLessonForm/NewLessonForm.jsx';
 import LessonsPage from './pages/LessonsPage/LessonsPage.jsx';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { auth } from './connection.js';
@@ -65,6 +65,10 @@ function App() {
         <Route path="/lessons">
           <Sidebar />
           <LessonsPage>{(userEmail, userUID)}</LessonsPage>
+        </Route>
+        <Route path="/new-lesson-form">
+          <Sidebar />
+          <NewLessonForm />
         </Route>
       </Switch>
     </BrowserRouter>
