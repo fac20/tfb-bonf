@@ -81,7 +81,7 @@ const LessonsPage = () => {
 
   return (
     <main>
-      <h2>Tutee's Lessons</h2>
+      <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
         <h3>Upcoming</h3>
         {lessonsArray ? (
@@ -89,7 +89,7 @@ const LessonsPage = () => {
         ) : (
           <></>
         )}
-        <button
+        <Button
           type="button"
           onClick={(e) => {
             e.preventDefault();
@@ -97,8 +97,8 @@ const LessonsPage = () => {
           }}
         >
           Add New Lesson
-        </button>
-        <button type="button">Add Homework</button>
+        </Button>
+        <Button type="button">Add Homework</Button>
         <h3>Past</h3>
       </LessonsWrapper>
     </main>
@@ -113,4 +113,16 @@ const LessonsWrapper = styled.div`
   box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
   width: fit-content;
   margin: auto;
+  padding: 2.3rem 3.5rem;
+  border: 1px solid black;
+  box-shadow: 4px 4px 0 black;
+`;
+
+const H2 = styled.h2`
+  text-align: center;
+`;
+
+const Button = styled.button`
+  display: inline-block;
+  margin: 15px 10px 10px 0;
 `;
