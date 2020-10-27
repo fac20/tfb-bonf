@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LevelSelectionPage() {
   return (
@@ -6,22 +7,22 @@ export default function LevelSelectionPage() {
       <h2>What level is your student at?</h2>
       <ul>
         <li>
-          <a href="/resources/a1">A1 - complete beginner</a>
+          <Link to="/resources/a1">A1 - complete beginner</Link>
         </li>
         <li>
-          <a href="/resources/a2">A2 - elementary</a>
+          <Link to="/resources/a2">A2 - elementary</Link>
         </li>
         <li>
-          <a href="/resources/b1">B1 - intermediate</a>
+          <Link to="/resources/b1">B1 - intermediate</Link>
         </li>
         <li>
-          <a href="/resources/b2">B2 - upper intermediate</a>
+          <Link to="/resources/b2">B2 - upper intermediate</Link>
         </li>
         <li>
-          <a href="/resources/c1">C1 - advanced</a>
+          <Link to="/resources/c1">C1 - advanced</Link>
         </li>
         <li>
-          <a href="/resources/c2">C2 - proficient</a>
+          <Link to="/resources/c2">C2 - proficient</Link>
         </li>
       </ul>
     </>

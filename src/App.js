@@ -22,34 +22,32 @@ function App() {
   });
 
   return (
-    <main>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact>
-            {loggedIn ? (
-              <>
-                <Sidebar />
-                <HomePage />
-              </>
-            ) : (
-              <LoginPage />
-            )}
-          </Route>
-          <Route path="/home">
-            <Sidebar />
-            <HomePage />
-          </Route>
-          <Route path="/resources">
-            <Sidebar />
-            <ResourcesPage />
-          </Route>
-          <Route path="/resources/:level">
-            <Sidebar />
-            <ResourcesPage />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </main>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact>
+          {loggedIn ? (
+            <>
+              <Sidebar />
+              <HomePage />
+            </>
+          ) : (
+            <LoginPage />
+          )}
+        </Route>
+        <Route path="/home">
+          <Sidebar />
+          <HomePage />
+        </Route>
+        <Route path="/resources">
+          <Sidebar />
+          <ResourcesPage />
+        </Route>
+        <Route path="/resources/:level">
+          <Sidebar />
+          <ResourcesPage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 export default function SkillSelectionPage() {
   const { level } = useParams();
@@ -9,19 +9,19 @@ export default function SkillSelectionPage() {
       <h2>Which skill would you like to see resources for?</h2>
       <ul>
         <li>
-          <a href={`/resources/${level}/reading`}>Reading</a>
+          <Link to={`/resources/${level}/reading`}>Reading</Link>
         </li>
         <li>
-          <a href={`resources/${level}/writing`}>Writing</a>
+          <Link to={`resources/${level}/writing`}>Writing</Link>
         </li>
         <li>
-          <a href={`resources/${level}/listening`}>Listening</a>
+          <Link to={`resources/${level}/listening`}>Listening</Link>
         </li>
         <li>
-          <a href={`resources/${level}/speaking`}>Speaking</a>
+          <Link to={`resources/${level}/speaking`}>Speaking</Link>
         </li>
         <li>
-          <a href={`resources/${level}/grammar`}>Grammar</a>
+          <Link to={`resources/${level}/grammar`}>Grammar</Link>
         </li>
       </ul>
     </>
