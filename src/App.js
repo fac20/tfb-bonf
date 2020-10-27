@@ -6,6 +6,7 @@ import { auth } from './connection.js';
 import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
+import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
 import Loading from './components/Loading/Loading.jsx';
 
 function App() {
@@ -48,6 +49,18 @@ function App() {
         <Route path="/home">
           <Sidebar />
           <HomePage />
+        </Route>
+        <Route path="/resources" exact>
+          <Sidebar />
+          <ResourcesPage />
+        </Route>
+        <Route path="/resources/:level" exact>
+          <Sidebar />
+          <ResourcesPage />
+        </Route>
+        <Route path="/resources/:level/:skill">
+          <Sidebar />
+          <ResourcesPage />
         </Route>
         <Route path="/lessons">
           <Sidebar />
