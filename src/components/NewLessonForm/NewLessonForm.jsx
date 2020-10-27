@@ -6,7 +6,8 @@ export default function NewLessonForm() {
 
   const changeData = (event) => {
     setFormData({
-      student: event.target.elements.student.value,
+      tutor: '', //get value from tutorData state
+      student: event.target.elements.student.value, //need to change to get value from tutorData
       title: event.target.elements.title.value,
       date: event.target.elements.date.value,
       time: event.target.elements.time.value,
