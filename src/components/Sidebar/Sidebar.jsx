@@ -29,10 +29,12 @@ const Sidebar = () => {
             <Anchor href="/resources">Resources</Anchor>
           </li>
           <li>
-            <Anchor href="/calendar">Calendar</Anchor>
+            <Anchor>Calendar</Anchor>
+            {/* <Anchor href="/calendar">Calendar</Anchor> */}
           </li>
           <li>
-            <Anchor href="/links">Useful Links</Anchor>
+            <Anchor>Useful Links</Anchor>
+            {/* <Anchor href="/links">Useful Links</Anchor> */}
           </li>
           <li>
             <LogoutButton onClick={logOut}>Logout</LogoutButton>
