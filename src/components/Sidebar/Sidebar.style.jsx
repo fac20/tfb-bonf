@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const LogoutButton = styled.button`
   background-color: #fff;
-  border-radius: 10%;
+  border-radius: 0.5rem;
   border: none;
   box-shadow: 4px 4px 0 hsl(0, 0%, 50.6%);
   cursor: pointer;
