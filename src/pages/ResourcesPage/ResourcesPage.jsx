@@ -6,5 +6,10 @@ import SkillSelectionPage from './SkillSelectionPage.jsx';
 export default function ResourcesPage() {
   const { level } = useParams();
 
-  return <main>{level ? <SkillSelectionPage /> : <LevelSelectionPage />}</main>;
+  return (
+    <main>
+      <h1>Resources</h1>
+      {level ? <SkillSelectionPage /> : <LevelSelectionPage />}
+    </main>
+  );
 }
