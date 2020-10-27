@@ -88,8 +88,8 @@ workflows:
   push:
     jobs:
       - cypress/run:
-        start: npm start
-        wait-on: 'http://localhost:3000'
+          start: npm start
+          wait-on: 'http://localhost:3000'
       - Installs
       - Linting:
           requires:
