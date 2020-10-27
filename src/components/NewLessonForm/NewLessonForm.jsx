@@ -80,6 +80,7 @@ export default function NewLessonForm() {
             level: formData.level,
             skills: formData.skills,
             link: formData.link,
+            // need to save tutor as well in the lessons collection
           });
       });
 
