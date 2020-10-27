@@ -38,11 +38,15 @@ function App() {
           <Sidebar />
           <HomePage />
         </Route>
-        <Route path="/resources">
+        <Route path="/resources" exact>
           <Sidebar />
           <ResourcesPage />
         </Route>
-        <Route path="/resources/:level">
+        <Route path="/resources/:level" exact>
+          <Sidebar />
+          <ResourcesPage />
+        </Route>
+        <Route path="/resources/:level/:skill">
           <Sidebar />
           <ResourcesPage />
         </Route>

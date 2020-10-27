@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 export default function SkillSelectionPage() {
-  const { level } = useParams();
+  const { level, skill } = useParams();
 
   return (
     <>
@@ -12,18 +12,23 @@ export default function SkillSelectionPage() {
           <Link to={`/resources/${level}/reading`}>Reading</Link>
         </li>
         <li>
-          <Link to={`resources/${level}/writing`}>Writing</Link>
+          <Link to={`/resources/${level}/writing`}>Writing</Link>
         </li>
         <li>
-          <Link to={`resources/${level}/listening`}>Listening</Link>
+          <Link to={`/resources/${level}/listening`}>Listening</Link>
         </li>
         <li>
-          <Link to={`resources/${level}/speaking`}>Speaking</Link>
+          <Link to={`/resources/${level}/speaking`}>Speaking</Link>
         </li>
         <li>
-          <Link to={`resources/${level}/grammar`}>Grammar</Link>
+          <Link to={`/resources/${level}/grammar`}>Grammar</Link>
         </li>
       </ul>
+      {skill ? (
+        <div>
+          <h1>Lesson data placeholder</h1>
+        </div>
+      ) : null}
     </>
   );
 }
