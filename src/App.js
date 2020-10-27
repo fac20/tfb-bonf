@@ -10,24 +10,36 @@ import findTutorWithEmail from './utils/findTutorWithEmail';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [userEmail, setUserEmail] = React.useState('');
+  // const [userEmail, setUserEmail] = React.useState('');
   const [tutorData, setTutorData] = React.useState({}); //how to use useContext (is it useful in this case at all)
+  //make a context object
+  //components can subscribe to that context
 
-  auth().onAuthStateChanged((user) => {
-    if (user) {
-      // User is signed in.
-      setLoggedIn(true);
-      console.log(user); //trying to figure out why logged multiple times (6-8)
-      //if we try to setTutorData here we get an error because of too many re-renders
-      findTutorWithEmail(user.email).then((data) => {
-        setTutorData(data);
-        console.log(tutorData);
+  //authentication needs to be inside a useEffect
+  //potentially could create an infinite loop
+  useEffect(() => {
+    if (loggedIn) {
+    async function () {
+      await auth().onAuthStateChanged(async (user) => {
+        // short-circuit this handler
+        if (loggedIn) {
+          return false;
+        }
+
+        if (user) {
+          // User is signed in.
+          setLoggedIn(true);
+
+          await findTutorWithEmail(user.email).then((data) => {
+            setTutorData(data);
+          });
+        } else {
+          // No user is signed in.
+          setLoggedIn(false);
+        }
       });
-    } else {
-      // No user is signed in.
-      setLoggedIn(false);
     }
-  });
+  }}, [loggedIn]);
 
   // var user = auth().currentUser;
   // var uid;
