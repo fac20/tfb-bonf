@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 export default function NewLessonForm() {
   const [formData, setFormData] = React.useState({});
+  const [addToResource, setAddToResource] = React.useState(false);
 
   const changeData = (event) => {
     setFormData({
@@ -12,7 +13,7 @@ export default function NewLessonForm() {
       title: event.target.elements.title.value,
       date: event.target.elements.date.value,
       time: event.target.elements.time.value,
-      level: event.target.elements.level.value,
+      level: event.target.elements.level.value.toUpperCase(),
       skills: {
         reading: event.target.elements.reading.checked,
         writing: event.target.elements.writing.checked,
@@ -22,7 +23,10 @@ export default function NewLessonForm() {
       },
       link: event.target.elements.link.value,
     });
+    if (event.target.elements.addresource.checked) setAddToResource(true);
+    if (!event.target.elements.addresource.checked) setAddToResource(false);
   };
+
   const submitData = (event) => {
     event.preventDefault();
     changeData(event);
@@ -38,21 +42,6 @@ export default function NewLessonForm() {
     console.log(formData);
     //potential issue, can't allow tutors to write student's name.
     // when we have 2 people with same names, .where is going to find 2 documnets. How do we solve it?
-
-    // db.collection('students')
-    // .where('name', '==', `${formData.student}`)
-    // .collection('lessons')
-    // .doc()
-    // .set({
-    //   date: formData.date,
-    //   time: formData.time,
-    //   title: formData.title,
-    //   level: formData.level,
-    //   skills: formData.skills,
-    //   link: formData.title,
-    // });
-
-    //London.Omar.Aishah.red
 
     let ID;
     //have function to pull user from local storage auth. Match tutor user to student. Get student "ID".
@@ -84,9 +73,15 @@ export default function NewLessonForm() {
             // need to save tutor as well in the lessons collection
           });
       });
-
-    //.collection('lessons').add(formData).then(docref => console.log("written WITH ID ", docref.id)).catch(err => console.err)
-  }, [formData]);
+    if (addToResource) {
+      db.collection('resources').doc().set({
+        title: formData.title,
+        level: formData.level,
+        skills: formData.skills,
+        link: formData.link,
+      });
+    }
+  }, [formData, addToResource]);
 
   return (
     <Form onSubmit={submitData}>
@@ -124,8 +119,9 @@ export default function NewLessonForm() {
       </Fieldset>
       <BlockLabel htmlFor="">Document link</BlockLabel>
       <Input type="url" name="link" id="doc-link" />
-      <Input type="checkbox" id="add-resource" />
-      <Label htmlFor="add-resource">Add to Resources</Label>
+      <Input type="checkbox" name="addresource" id="addresource" />
+      <Label htmlFor="addresource">Add to Resources</Label>
+      {/* add info about what this means if its checked. warning not to include personal info (use the same google doc)*/}
       <Button type="submit"> Add New Lesson</Button>
     </Form>
   );
