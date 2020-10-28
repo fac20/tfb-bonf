@@ -59,19 +59,15 @@ export default function NewLessonForm() {
         });
       })
       .then(() => {
-        db.collection('students')
-          .doc(ID)
-          .collection('lessons')
-          .doc(`${formData.date} ${formData.time}`)
-          .set({
-            date: formData.date,
-            time: formData.time,
-            title: formData.title,
-            level: formData.level,
-            skills: formData.skills,
-            link: formData.link,
-            // need to save tutor as well in the lessons collection
-          });
+        db.collection('students').doc(ID).collection('lessons').doc().set({
+          date: formData.date,
+          time: formData.time,
+          title: formData.title,
+          level: formData.level,
+          skills: formData.skills,
+          link: formData.link,
+          // need to save tutor as well in the lessons collection
+        });
       });
     if (addToResource) {
       db.collection('resources').doc().set({
@@ -81,7 +77,7 @@ export default function NewLessonForm() {
         link: formData.link,
       });
     }
-  }, [formData, addToResource]);
+  }, [formData, addToResource]); //would this make it submit twice?
 
   return (
     <Form onSubmit={submitData}>
