@@ -19,6 +19,9 @@ export const LevelBox = styled.div`
 export const SkillsBox = styled(LevelBox)`
   background-color: hsl(47.058823529411775, 100%, 90%);
   width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
 `;
 
 export const TitleBox = styled(LevelBox)`

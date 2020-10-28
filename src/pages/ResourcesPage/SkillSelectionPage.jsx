@@ -16,7 +16,21 @@ export default function SkillSelectionPage() {
       .where(`skills.${skill}`, '==', true)
       .get()
       .then((snap) => {
-        snap.forEach((doc) => res.push(doc.data()));
+        snap.forEach((doc) => {
+          res.push(doc.data());
+        });
+        res = res.map((resource) => {
+          let skillsString = '';
+          if (resource.skills.reading) skillsString += 'Reading ';
+          if (resource.skills.writing) skillsString += 'Writing ';
+          if (resource.skills.listening) skillsString += 'Listening ';
+          if (resource.skills.speaking) skillsString += 'Speaking ';
+          if (resource.skills.grammar) skillsString += 'Grammar ';
+          return Object.assign(
+            Object.fromEntries([['skillsString', skillsString]]),
+            resource
+          );
+        });
         console.log(res);
         setResourceArray(res);
       })
@@ -35,10 +49,10 @@ export default function SkillSelectionPage() {
         Header: 'Level',
         accessor: 'level',
       },
-      // {
-      //   Header: 'Skills',
-      //   accessor: 'skills',
-      // },
+      {
+        Header: 'Skills',
+        accessor: 'skillsString',
+      },
       {
         Header: 'Link',
         accessor: 'link',
@@ -53,22 +67,28 @@ export default function SkillSelectionPage() {
         <h2>Which skill would you like to see resources for?</h2>
       </TitleBox>
       <SkillsBox>
-        <LinkButton>
-          <Link to={`/resources/${level}/reading`}>Reading</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/writing`}>Writing</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/listening`}>Listening</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/speaking`}>Speaking</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/grammar`}>Grammar</Link>
-        </LinkButton>
-        {skill ? <Table columns={tableHeaders} data={resourceArray} /> : <></>}
+        <div>
+          <LinkButton>
+            <Link to={`/resources/${level}/reading`}>Reading</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/writing`}>Writing</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/listening`}>Listening</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/speaking`}>Speaking</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/grammar`}>Grammar</Link>
+          </LinkButton>
+        </div>
+        {skill && resourceArray ? (
+          <Table columns={tableHeaders} data={resourceArray} />
+        ) : (
+          <></>
+        )}
       </SkillsBox>
     </>
   );
