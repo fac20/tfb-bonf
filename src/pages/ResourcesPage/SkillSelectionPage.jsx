@@ -67,21 +67,23 @@ export default function SkillSelectionPage() {
         <h2>Which skill would you like to see resources for?</h2>
       </TitleBox>
       <SkillsBox>
-        <LinkButton>
-          <Link to={`/resources/${level}/reading`}>Reading</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/writing`}>Writing</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/listening`}>Listening</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/speaking`}>Speaking</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to={`/resources/${level}/grammar`}>Grammar</Link>
-        </LinkButton>
+        <div>
+          <LinkButton>
+            <Link to={`/resources/${level}/reading`}>Reading</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/writing`}>Writing</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/listening`}>Listening</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/speaking`}>Speaking</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to={`/resources/${level}/grammar`}>Grammar</Link>
+          </LinkButton>
+        </div>
         {skill ? <Table columns={tableHeaders} data={resourceArray} /> : <></>}
       </SkillsBox>
     </>
