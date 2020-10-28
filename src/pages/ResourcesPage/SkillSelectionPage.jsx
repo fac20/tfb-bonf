@@ -19,7 +19,7 @@ export default function SkillSelectionPage() {
         snap.forEach((doc) => {
           res.push(doc.data());
         });
-        res.map((resource) => {
+        res = res.map((resource) => {
           let skillsString = '';
           if (resource.skills.reading) skillsString += 'Reading ';
           if (resource.skills.writing) skillsString += 'Writing ';
