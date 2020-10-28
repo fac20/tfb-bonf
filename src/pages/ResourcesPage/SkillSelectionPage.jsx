@@ -1,25 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { db } from '../../connection.js';
+import Table from './../../components/Table/Table';
 import { LinkButton, SkillsBox, TitleBox } from './ResourcesPage.style';
 
 export default function SkillSelectionPage() {
   const { level, skill } = useParams();
+  const [resourceArray, setResourceArray] = React.useState('');
 
+  // request resources by level and skill
   useEffect(() => {
+    let res = [];
     db.collection('resources')
       .where('level', '==', level.toUpperCase())
-      // .where(`skills.${skill}`, '==', 'true')
+      .where(`skills.${skill}`, '==', true)
       .get()
-      .then((querySnapshot) =>
-        querySnapshot.forEach((doc) => {
-          console.log('Document data:', doc.data());
-        })
-      )
+      .then((snap) => {
+        snap.forEach((doc) => res.push(doc.data()));
+        console.log(res);
+        setResourceArray(res);
+      })
       .catch((error) => {
-        console.log('Error getting document:', error);
+        console.log('Error getting documents:', error);
       });
-  });
+  }, [skill, level]);
+
+  const tableHeaders = useMemo(
+    () => [
+      {
+        Header: 'Title',
+        accessor: 'title', //click title for link to document
+      },
+      {
+        Header: 'Level',
+        accessor: 'level',
+      },
+      // {
+      //   Header: 'Skills',
+      //   accessor: 'skills',
+      // },
+      {
+        Header: 'Link',
+        accessor: 'link',
+      },
+    ],
+    []
+  );
 
   return (
     <>
@@ -42,11 +68,7 @@ export default function SkillSelectionPage() {
         <LinkButton>
           <Link to={`/resources/${level}/grammar`}>Grammar</Link>
         </LinkButton>
-        {skill ? (
-          <div>
-            <h1>Lesson data placeholder for {skill}</h1>
-          </div>
-        ) : null}
+        {skill ? <Table columns={tableHeaders} data={resourceArray} /> : <></>}
       </SkillsBox>
     </>
   );
