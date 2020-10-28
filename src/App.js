@@ -32,19 +32,16 @@ function App() {
   }, []);
 
   if (isLoading) return <Loading />;
+  if (!loggedIn) return <LoginPage />;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          {loggedIn ? (
-            <>
-              <Sidebar />
-              <HomePage />
-            </>
-          ) : (
-            <LoginPage />
-          )}
+          <>
+            <Sidebar />
+            <HomePage />
+          </>
         </Route>
         <Route path="/home">
           <Sidebar />
