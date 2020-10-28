@@ -5,6 +5,7 @@ import styled from 'styled-components';
 export default function NewLessonForm() {
   const [formData, setFormData] = React.useState({});
   const [addToResource, setAddToResource] = React.useState(false);
+  const [resourceChecked, setResourceChecked] = React.useState(false);
 
   const changeData = (event) => {
     setFormData({
@@ -115,9 +116,26 @@ export default function NewLessonForm() {
       </Fieldset>
       <BlockLabel htmlFor="">Document link</BlockLabel>
       <Input type="url" name="link" id="doc-link" />
-      <Input type="checkbox" name="addresource" id="addresource" />
+      <Input
+        type="checkbox"
+        name="addresource"
+        id="addresource"
+        onChange={(event) => {
+          setResourceChecked(event.target.checked);
+        }}
+      />
       <Label htmlFor="addresource">Add to Resources</Label>
       {/* add info about what this means if its checked. warning not to include personal info (use the same google doc)*/}
+      {resourceChecked ? (
+        <span>
+          <br />
+          WARNING: Adding to resources will make this available to all tutors.
+          Please ensure the document does not contain any of your student's
+          personal data.
+        </span>
+      ) : (
+        <></>
+      )}
       <Button type="submit"> Add New Lesson</Button>
     </Form>
   );

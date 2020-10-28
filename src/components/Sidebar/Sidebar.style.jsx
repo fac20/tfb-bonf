@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LogoutButton = styled.button`
-  background-color: #fff;
+  background-color: white;
   border-radius: 0.5rem;
   border: none;
   box-shadow: 4px 4px 0 hsl(0, 0%, 50.6%);
@@ -34,7 +34,7 @@ export const Nav = styled.nav`
 export const CloseButton = styled.button`
   background-color: transparent;
   border: none;
-  color: hsl(0, 0%, 50.6%);
+  color: white;
   font-size: 3rem;
   position: absolute;
   right: 1rem;
@@ -56,7 +56,7 @@ export const Anchor = styled.a`
   transition: 0.3s;
   /* When you mouse over the navigation links, change their color */
   &:hover {
-    color: #f1f1f1;
+    color: white;
   }
 `;
 
