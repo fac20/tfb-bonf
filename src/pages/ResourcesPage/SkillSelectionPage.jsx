@@ -16,7 +16,21 @@ export default function SkillSelectionPage() {
       .where(`skills.${skill}`, '==', true)
       .get()
       .then((snap) => {
-        snap.forEach((doc) => res.push(doc.data()));
+        snap.forEach((doc) => {
+          res.push(doc.data());
+        });
+        res.map((resource) => {
+          let skillsString = '';
+          if (resource.skills.reading) skillsString += 'Reading ';
+          if (resource.skills.writing) skillsString += 'Writing ';
+          if (resource.skills.listening) skillsString += 'Listening ';
+          if (resource.skills.speaking) skillsString += 'Speaking ';
+          if (resource.skills.grammar) skillsString += 'Grammar ';
+          return Object.assign(
+            Object.fromEntries([['skillsString', skillsString]]),
+            resource
+          );
+        });
         console.log(res);
         setResourceArray(res);
       })
@@ -35,10 +49,10 @@ export default function SkillSelectionPage() {
         Header: 'Level',
         accessor: 'level',
       },
-      // {
-      //   Header: 'Skills',
-      //   accessor: 'skills',
-      // },
+      {
+        Header: 'Skills',
+        accessor: 'skillsString',
+      },
       {
         Header: 'Link',
         accessor: 'link',
