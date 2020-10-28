@@ -1,11 +1,13 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { db } from '../../connection.js';
 import Table from './../../components/Table/Table';
+import NewResourceForm from '../../components/NewResourceForm/NewResourceForm.jsx';
 import { LinkButton, SkillsBox, TitleBox } from './ResourcesPage.style';
 
 export default function SkillSelectionPage() {
   const { level, skill } = useParams();
+  const [newResource, setNewResource] = useState(false);
   const [resourceArray, setResourceArray] = React.useState('');
 
   // request resources by level and skill
@@ -19,6 +21,7 @@ export default function SkillSelectionPage() {
         snap.forEach((doc) => {
           res.push(doc.data());
         });
+        // create string of all skills
         res = res.map((resource) => {
           let skillsString = '';
           if (resource.skills.reading) skillsString += 'Reading ';
@@ -31,7 +34,7 @@ export default function SkillSelectionPage() {
             resource
           );
         });
-        console.log(res);
+        // console.log(res);
         setResourceArray(res);
       })
       .catch((error) => {
@@ -84,11 +87,17 @@ export default function SkillSelectionPage() {
             <Link to={`/resources/${level}/grammar`}>Grammar</Link>
           </LinkButton>
         </div>
-        {skill && resourceArray ? (
-          <Table columns={tableHeaders} data={resourceArray} />
-        ) : (
-          <></>
-        )}
+        <div>
+          {skill && resourceArray ? (
+            <Table columns={tableHeaders} data={resourceArray} />
+          ) : (
+            <></>
+          )}
+          <button onClick={() => setNewResource(!newResource)}>
+            Add Resource
+          </button>
+        </div>
+        {newResource ? <NewResourceForm /> : <></>}
       </SkillsBox>
     </>
   );
