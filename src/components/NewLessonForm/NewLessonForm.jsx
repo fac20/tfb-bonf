@@ -1,5 +1,6 @@
 import React from 'react';
 import { db } from '../../connection.js';
+import styled from 'styled-components';
 
 export default function NewLessonForm() {
   const [formData, setFormData] = React.useState({});
@@ -88,16 +89,16 @@ export default function NewLessonForm() {
   }, [formData]);
 
   return (
-    <form onSubmit={submitData}>
-      <label htmlFor="student">Student</label>
-      <input type="text" name="student" id="student" />
-      <label htmlFor="title">Lesson Title</label>
-      <input type="text" name="title" id="title" />
-      <label htmlFor="date">Date</label>
-      <input type="date" name="date " id="date" />
-      <label htmlFor="time">Time</label>
-      <input type="time" name="time" id="time" />
-      <label htmlFor="level">Select a level:</label>
+    <Form onSubmit={submitData}>
+      <BlockLabel htmlFor="student">Student</BlockLabel>
+      <Input type="text" name="student" id="student" />
+      <BlockLabel htmlFor="title">Lesson Title</BlockLabel>
+      <Input type="text" name="title" id="title" />
+      <BlockLabel htmlFor="date">Date</BlockLabel>
+      <Input type="date" name="date " id="date" />
+      <BlockLabel htmlFor="time">Time</BlockLabel>
+      <Input type="time" name="time" id="time" />
+      <BlockLabel htmlFor="level">Select a level:</BlockLabel>
       <select id="level" name="level">
         <option value="a1">A1</option>
         <option value="a2">A2</option>
@@ -108,24 +109,65 @@ export default function NewLessonForm() {
         <option value="c1">C1</option>
         <option value="c2">C2</option>
       </select>
-      <fieldset>
-        <legend>Skills</legend>
-        <input type="checkbox" name="reading" id="reading" />
-        <label htmlFor="reading">Reading</label>
-        <input type="checkbox" name="writing" id="writing" />
-        <label htmlFor="writing">Writing</label>
-        <input type="checkbox" name="speaking" id="speaking" />
-        <label htmlFor="speaking">Speaking</label>
-        <input type="checkbox" name="listening" id="listening" />
-        <label htmlFor="listening">Listening</label>
-        <input type="checkbox" name="grammar" id="grammar" />
-        <label htmlFor="grammar">Grammar</label>
-      </fieldset>
-      <label htmlFor="">Document link</label>
-      <input type="url" name="link" id="doc-link" />
-      <input type="checkbox" id="add-resource" />
-      <label htmlFor="add-resource">Add to Resources</label>
-      <button type="submit"> Add New Lesson</button>
-    </form>
+      <Fieldset>
+        <Legend>Skills</Legend>
+        <Input type="checkbox" name="reading" id="reading" />
+        <Label htmlFor="reading">Reading</Label>
+        <Input type="checkbox" name="writing" id="writing" />
+        <Label htmlFor="writing">Writing</Label>
+        <Input type="checkbox" name="speaking" id="speaking" />
+        <Label htmlFor="speaking">Speaking</Label>
+        <Input type="checkbox" name="listening" id="listening" />
+        <Label htmlFor="listening">Listening</Label>
+        <Input type="checkbox" name="grammar" id="grammar" />
+        <Label htmlFor="grammar">Grammar</Label>
+      </Fieldset>
+      <BlockLabel htmlFor="">Document link</BlockLabel>
+      <Input type="url" name="link" id="doc-link" />
+      <Input type="checkbox" id="add-resource" />
+      <Label htmlFor="add-resource">Add to Resources</Label>
+      <Button type="submit"> Add New Lesson</Button>
+    </Form>
   );
 }
+
+const Form = styled.form`
+  max-width: 100ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background-color: rgb(255, 244, 204);
+  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
+  width: fit-content;
+  margin: 4rem auto;
+  padding: 2.3rem 3.5rem;
+  border: 1px solid black;
+  box-shadow: 4px 4px 0 black;
+`;
+
+const Label = styled.label`
+  display: inline-block;
+  margin: auto 1rem auto 0.2rem;
+`;
+
+const Input = styled.input`
+  display: inline-block;
+`;
+
+const BlockLabel = styled.label`
+  margin: 1.5rem auto 0.4rem;
+  font-weight: 600;
+`;
+
+const Fieldset = styled.fieldset`
+  margin: 1.5rem auto 0.4rem;
+`;
+
+const Legend = styled.legend`
+  font-weight: 600;
+`;
+
+const Button = styled.button`
+  margin: 1.5rem auto 0.4rem;
+`;
