@@ -84,7 +84,11 @@ export default function SkillSelectionPage() {
             <Link to={`/resources/${level}/grammar`}>Grammar</Link>
           </LinkButton>
         </div>
-        {skill ? <Table columns={tableHeaders} data={resourceArray} /> : <></>}
+        {skill && resourceArray ? (
+          <Table columns={tableHeaders} data={resourceArray} />
+        ) : (
+          <></>
+        )}
       </SkillsBox>
     </>
   );
