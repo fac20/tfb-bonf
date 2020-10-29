@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { db } from '../../connection.js';
 import Table from './../../components/Table/Table';
 import NewResourceForm from '../../components/NewResourceForm/NewResourceForm.jsx';
-import { LinkButton, SkillsBox, TitleBox } from './ResourcesPage.style';
+import { Button, LinkButton, SkillsBox, TitleBox } from './ResourcesPage.style';
 
 export default function SkillSelectionPage() {
   const { level, skill } = useParams();
@@ -93,9 +93,9 @@ export default function SkillSelectionPage() {
           ) : (
             <></>
           )}
-          <button onClick={() => setNewResource(!newResource)}>
+          <Button onClick={() => setNewResource(!newResource)}>
             Add Resource
-          </button>
+          </Button>
         </div>
         {newResource ? <NewResourceForm /> : <></>}
       </SkillsBox>

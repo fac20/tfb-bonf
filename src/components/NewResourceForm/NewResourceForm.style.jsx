@@ -35,5 +35,11 @@ export const Legend = styled.legend`
 `;
 
 export const Button = styled.button`
-  margin: 1.5rem auto 0.4rem;
+  background-color: #63b6fe;
+  border-radius: 0.5rem;
+  border: none;
+  color: white;
+  font-weight: 800;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
 `;

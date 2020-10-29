@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const Button = styled.button`
+  background-color: #63b6fe;
+  border-radius: 0.5rem;
+  border: none;
+  color: white;
+  font-weight: 800;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+`;
+
 export const H1 = styled.h1`
   color: #63b6fe;
 `;
@@ -17,7 +27,7 @@ export const LevelBox = styled.div`
 `;
 
 export const SkillsBox = styled(LevelBox)`
-  background-color: hsl(47.058823529411775, 100%, 90%);
+  background-color: #d6fcf7;
   width: fit-content;
   display: flex;
   flex-direction: row;
@@ -33,7 +43,8 @@ export const TitleBox = styled(LevelBox)`
   width: fit-content;
 `;
 
-export const LinkButton = styled.button`
+export const LinkButton = styled.div`
+  text-align: center;
   background-color: #e9e7fc;
   border-radius: 0.8rem;
   border: 2px solid black;
