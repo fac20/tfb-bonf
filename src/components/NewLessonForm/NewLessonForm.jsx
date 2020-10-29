@@ -86,7 +86,10 @@ export default function NewLessonForm({ setNewLesson }) {
         link: formData.link,
       });
     }
-    setNewLesson(false);
+    // wait for db to update before closing the form and re-rendering the lessons table
+    setInterval(() => {
+      setNewLesson(false);
+    }, 1000);
   }, [formData, addToResource, setNewLesson]); //would this make it submit twice?
 
   return (

@@ -51,7 +51,6 @@ const LessonsPage = () => {
       let curr_month = myDate.getMonth() + 1;
       let curr_year = myDate.getFullYear();
       let today = curr_year + '-' + curr_month + '-' + curr_date;
-      console.log(today);
       for (let i = 0; i < data.length; i++) {
         if (data[i].date >= today) {
           upcomingArray.push(data[i]);
@@ -61,10 +60,8 @@ const LessonsPage = () => {
       }
       setupComingLessonsArray(upcomingArray);
       setPastLessonsArray(pastArray);
-
-      console.log(Date());
     });
-  }, []);
+  }, [newLesson]);
 
   const tableHeaders = React.useMemo(
     () => [
