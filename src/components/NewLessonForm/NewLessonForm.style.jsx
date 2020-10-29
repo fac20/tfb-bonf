@@ -9,6 +9,7 @@ export const Form = styled.form`
   max-width: 40ch;
   padding: 1rem 2rem;
   position: fixed;
+  top: 2rem;
   width: fit-content;
   z-index: 1;
 `;
@@ -54,4 +55,10 @@ export const CloseButton = styled.button`
   position: absolute;
   right: 1rem;
   top: 1rem;
+`;
+
+export const InputURL = styled.input`
+  display: block;
+  width: 100%;
+  margin-bottom: 1.2rem;
 `;

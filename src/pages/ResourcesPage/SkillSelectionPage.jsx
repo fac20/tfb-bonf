@@ -1,14 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { db } from '../../connection.js';
 import Table from './../../components/Table/Table';
 import NewResourceForm from '../../components/NewResourceForm/NewResourceForm.jsx';
-import { Button, LinkButton, SkillsBox, TitleBox } from './ResourcesPage.style';
+import {
+  BackButton,
+  Button,
+  LinkButton,
+  SkillsBox,
+  TitleBox,
+} from './ResourcesPage.style';
 
 export default function SkillSelectionPage() {
   const { level, skill } = useParams();
   const [newResource, setNewResource] = useState(false);
   const [resourceArray, setResourceArray] = React.useState('');
+
+  const history = useHistory();
 
   // request resources by level and skill
   useEffect(() => {
@@ -70,6 +78,9 @@ export default function SkillSelectionPage() {
         <h2>Which skill would you like to see resources for?</h2>
       </TitleBox>
       <SkillsBox>
+        <BackButton onClick={() => history.push('/resources/')}>
+          &larr;
+        </BackButton>
         <div>
           <LinkButton>
             <Link to={`/resources/${level}/reading`}>Reading</Link>
@@ -89,13 +100,15 @@ export default function SkillSelectionPage() {
         </div>
         <div>
           {skill && resourceArray ? (
-            <Table columns={tableHeaders} data={resourceArray} />
+            <>
+              <Table columns={tableHeaders} data={resourceArray} />
+              <Button onClick={() => setNewResource(!newResource)}>
+                Add Resource
+              </Button>
+            </>
           ) : (
             <></>
           )}
-          <Button onClick={() => setNewResource(!newResource)}>
-            Add Resource
-          </Button>
         </div>
         {newResource ? (
           <NewResourceForm setNewResource={setNewResource} />
