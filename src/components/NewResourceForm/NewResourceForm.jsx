@@ -16,11 +16,7 @@ export default function NewResourceForm({ setNewResource }) {
 
   const changeData = (event) => {
     setFormData({
-      tutor: '', //get value from tutorData state
-      student: event.target.elements.student.value, //need to change to get value from tutorData
       title: event.target.elements.title.value,
-      date: event.target.elements.date.value,
-      time: event.target.elements.time.value,
       level: event.target.elements.level.value.toUpperCase(),
       skills: {
         reading: event.target.elements.reading.checked,
@@ -45,8 +41,6 @@ export default function NewResourceForm({ setNewResource }) {
       isFirstRun.current = false;
       return;
     }
-    console.log(formData);
-
     db.collection('resources').doc().set({
       title: formData.title,
       level: formData.level,
