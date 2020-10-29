@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  max-width: 100ch;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1.5rem;
-  border-radius: 20px;
   background-color: rgb(255, 244, 204);
-  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
-  width: fit-content;
-  margin: 4rem auto;
-  padding: 2.3rem 3.5rem;
+  border-radius: 20px;
   border: 1px solid black;
   box-shadow: 4px 4px 0 black;
+  margin: auto;
+  max-width: 40ch;
+  padding: 1rem 2rem;
+  position: fixed;
+  width: fit-content;
 `;
 
 export const Label = styled.label`
