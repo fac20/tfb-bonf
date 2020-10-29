@@ -1,5 +1,6 @@
 import React from 'react';
 import logOut from '../../utils/logOut';
+import { logo150 } from '../../assets/images';
 import {
   Anchor,
   CloseButton,
@@ -7,6 +8,7 @@ import {
   Nav,
   OpenButton,
   UL,
+  LogoImage,
 } from './Sidebar.style';
 
 const Sidebar = () => {
@@ -17,6 +19,7 @@ const Sidebar = () => {
     <>
       <OpenButton onClick={unfurl}>&equiv;</OpenButton>
       <Nav style={{ width: sidebarWidth }}>
+        <LogoImage src={logo150} srcSet={`${logo150} 150w`} />
         <CloseButton onClick={collapse}>&times;</CloseButton>
         <UL>
           <li>
