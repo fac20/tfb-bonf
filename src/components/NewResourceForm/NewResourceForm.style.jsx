@@ -10,6 +10,7 @@ export const Form = styled.form`
   padding: 1rem 2rem;
   position: fixed;
   width: fit-content;
+  z-index: 1;
 `;
 
 export const Label = styled.label`
@@ -41,7 +42,7 @@ export const Button = styled.button`
   color: white;
   font-weight: 800;
   margin: 1rem auto;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
 `;
 
 export const CloseButton = styled.button`

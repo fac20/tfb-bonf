@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  max-width: 100ch;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1.5rem;
-  border-radius: 20px;
   background-color: rgb(255, 244, 204);
-  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
-  width: fit-content;
-  margin: 4rem auto;
-  padding: 2.3rem 3.5rem;
+  border-radius: 20px;
   border: 1px solid black;
   box-shadow: 4px 4px 0 black;
+  margin: auto;
+  max-width: 40ch;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 2rem;
+  width: fit-content;
+  z-index: 1;
 `;
 
 export const Label = styled.label`
@@ -38,5 +37,22 @@ export const Legend = styled.legend`
 `;
 
 export const Button = styled.button`
-  margin: 1.5rem auto 0.4rem;
+  background-color: #63b6fe;
+  border-radius: 0.5rem;
+  border: none;
+  color: white;
+  font-weight: 800;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+`;
+
+export const CloseButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: #63b6fe;
+  display: inline;
+  font-size: 3em;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 `;
