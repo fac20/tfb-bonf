@@ -135,7 +135,11 @@ export default function HomePage({
         <Button type="button" onClick={() => setNewLesson(!newLesson)}>
           Add New Lesson
         </Button>
-        {newLesson ? <NewLessonForm setNewLesson={setNewLesson} /> : <></>}
+        {newLesson ? (
+          <NewLessonForm tutorData={tutorData} setNewLesson={setNewLesson} />
+        ) : (
+          <></>
+        )}
       </LessonsWrapper>
     </main>
   );

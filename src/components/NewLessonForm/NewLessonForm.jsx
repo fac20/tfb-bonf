@@ -12,7 +12,7 @@ import {
   InputURL,
 } from './NewLessonForm.style';
 
-export default function NewLessonForm({ setNewLesson }) {
+export default function NewLessonForm({ tutorData, setNewLesson }) {
   const [formData, setFormData] = React.useState({});
   const [addToResource, setAddToResource] = React.useState(false);
   const [resourceChecked, setResourceChecked] = React.useState(false);

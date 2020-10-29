@@ -25,7 +25,7 @@ const LessonsPage = ({
     let lessons = [];
     return db
       .collection('students')
-      .doc('sam')
+      .doc(tutorData.student.id)
       .collection('lessons')
       .get()
       .then((querySnapshot) => {
@@ -51,25 +51,28 @@ const LessonsPage = ({
   };
 
   React.useEffect(() => {
-    thisFunction().then((data) => {
-      let upcomingArray = [];
-      let pastArray = [];
-      let myDate = new Date();
-      let curr_date = myDate.getDate();
-      let curr_month = myDate.getMonth() + 1;
-      let curr_year = myDate.getFullYear();
-      let today = curr_year + '-' + curr_month + '-' + curr_date;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].date >= today) {
-          upcomingArray.push(data[i]);
-        } else {
-          pastArray.push(data[i]);
+    if (tutorData) {
+      thisFunction().then((data) => {
+        let upcomingArray = [];
+        let pastArray = [];
+        let myDate = new Date();
+        let curr_date = myDate.getDate();
+        let curr_month = myDate.getMonth() + 1;
+        let curr_year = myDate.getFullYear();
+        let today = curr_year + '-' + curr_month + '-' + curr_date;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].date >= today) {
+            upcomingArray.push(data[i]);
+          } else {
+            pastArray.push(data[i]);
+          }
         }
-      }
-      setUpcomingLessonsArray(upcomingArray);
-      setPastLessonsArray(pastArray);
-    });
-  }, [newLesson, setUpcomingLessonsArray, setPastLessonsArray]);
+        console.log(upcomingArray);
+        setUpcomingLessonsArray(upcomingArray);
+        setPastLessonsArray(pastArray);
+      });
+    }
+  }, [newLesson, setPastLessonsArray, setUpcomingLessonsArray, tutorData]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -132,7 +135,11 @@ const LessonsPage = ({
         ) : (
           <></>
         )}
-        {newLesson ? <NewLessonForm setNewLesson={setNewLesson} /> : <></>}
+        {newLesson ? (
+          <NewLessonForm tutorData={tutorData} setNewLesson={setNewLesson} />
+        ) : (
+          <></>
+        )}
       </LessonsWrapper>
     </main>
   );
