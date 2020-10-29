@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const BackButton = styled.button`
   border-radius: 50%;
   border: 1px solid black;
-  box-shadow: 4px 4px 0 black;
+  box-shadow: 2px 2px 0 black;
   font-size: 2em;
   font-weight: 900;
   height: 1.5em;

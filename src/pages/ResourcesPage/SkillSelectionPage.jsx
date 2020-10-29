@@ -79,7 +79,7 @@ export default function SkillSelectionPage() {
       </TitleBox>
       <SkillsBox>
         <BackButton onClick={() => history.push('/resources/')}>
-          &lang;
+          &larr;
         </BackButton>
         <div>
           <LinkButton>
