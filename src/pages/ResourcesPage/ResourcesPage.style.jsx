@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const BackButton = styled.button`
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 2px 2px 0 black;
+  font-size: 2em;
+  font-weight: 900;
+  height: 1.5em;
+  width: 1.5em;
+`;
+
 export const Button = styled.button`
   background-color: #63b6fe;
   border-radius: 0.5rem;
@@ -7,7 +17,7 @@ export const Button = styled.button`
   color: white;
   font-weight: 800;
   margin: 1rem auto;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
 `;
 
 export const H1 = styled.h1`
