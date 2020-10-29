@@ -3,6 +3,7 @@ import { db } from '../../connection.js';
 import {
   BlockLabel,
   Button,
+  CloseButton,
   Fieldset,
   Form,
   Input,
@@ -10,7 +11,7 @@ import {
   Legend,
 } from './NewLessonForm.style';
 
-export default function NewLessonForm() {
+export default function NewLessonForm({ setNewLesson }) {
   const [formData, setFormData] = React.useState({});
   const [addToResource, setAddToResource] = React.useState(false);
   const [resourceChecked, setResourceChecked] = React.useState(false);
@@ -48,7 +49,6 @@ export default function NewLessonForm() {
       isFirstRun.current = false;
       return;
     }
-    console.log(formData);
     //potential issue, can't allow tutors to write student's name.
     // when we have 2 people with same names, .where is going to find 2 documnets. How do we solve it?
 
@@ -63,7 +63,6 @@ export default function NewLessonForm() {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          // console.log(doc.data())
           ID = doc.id;
         });
       })
@@ -86,10 +85,12 @@ export default function NewLessonForm() {
         link: formData.link,
       });
     }
-  }, [formData, addToResource]); //would this make it submit twice?
+    setNewLesson(false);
+  }, [formData, addToResource, setNewLesson]); //would this make it submit twice?
 
   return (
     <Form onSubmit={submitData}>
+      <CloseButton onClick={() => setNewLesson(false)}>&times;</CloseButton>
       <BlockLabel htmlFor="student">Student</BlockLabel>
       <Input type="text" name="student" id="student" />
       <BlockLabel htmlFor="title">Lesson Title</BlockLabel>
