@@ -47,7 +47,9 @@ export default function NewResourceForm({ setNewResource }) {
       skills: formData.skills,
       link: formData.link,
     });
-  }, [formData]); //would this make it submit twice?
+    // close form after submit
+    setNewResource(false);
+  }, [formData, setNewResource]); //would this make it submit twice?
 
   return (
     <Form onSubmit={submitData}>

@@ -41,7 +41,7 @@ export const Button = styled.button`
   color: white;
   font-weight: 800;
   margin: 1rem auto;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
 `;
 
 export const CloseButton = styled.button`
