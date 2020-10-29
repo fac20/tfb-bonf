@@ -5,7 +5,8 @@ import styled from 'styled-components';
 
 const LessonsPage = () => {
   //need useState because re-rendering of component will make variable declaration empty
-  const [lessonsArray, setLessonsArray] = React.useState('');
+  const [upcominglessonsArray, setupcomingLessonsArray] = React.useState('');
+  const [pastlessonsArray, setpastLessonsArray] = React.useState('');
 
   const thisfunction = () => {
     let lessons = [];
@@ -38,7 +39,24 @@ const LessonsPage = () => {
 
   React.useEffect(() => {
     thisfunction().then((data) => {
-      setLessonsArray(data);
+      let upcomingArray = [];
+      let pastArray = [];
+      let mydate = new Date();
+      let curr_date = mydate.getDate();
+      let curr_month = mydate.getMonth() + 1;
+      let curr_year = mydate.getFullYear();
+      let today = curr_year + '-' + curr_month + '-' + curr_date;
+      console.log(today);
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].date >= today) {
+          upcomingArray.push(data[i]);
+        } else {
+          pastArray.push(data[i]);
+        }
+      }
+      setupcomingLessonsArray(upcomingArray);
+      setpastLessonsArray(pastArray);
+
       console.log(Date());
     });
   }, []);
@@ -84,8 +102,8 @@ const LessonsPage = () => {
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
         <h3>Upcoming</h3>
-        {lessonsArray ? (
-          <Table columns={tableHeaders} data={lessonsArray} />
+        {upcominglessonsArray ? (
+          <Table columns={tableHeaders} data={upcominglessonsArray} />
         ) : (
           <></>
         )}
@@ -100,6 +118,11 @@ const LessonsPage = () => {
         </Button>
         <Button type="button">Add Homework</Button>
         <h3>Past</h3>
+        {pastlessonsArray ? (
+          <Table columns={tableHeaders} data={pastlessonsArray} />
+        ) : (
+          <></>
+        )}
       </LessonsWrapper>
     </main>
   );

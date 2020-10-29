@@ -64,7 +64,7 @@ export default function NewLessonForm() {
           date: formData.date,
           time: formData.time,
           title: formData.title,
-          level: formData.level,
+          level: formData.level.toUpperCase(),
           skills: formData.skills,
           link: formData.link,
           // need to save tutor as well in the lessons collection
@@ -73,7 +73,7 @@ export default function NewLessonForm() {
     if (addToResource) {
       db.collection('resources').doc().set({
         title: formData.title,
-        level: formData.level,
+        level: formData.level.toUpperCase(),
         skills: formData.skills,
         link: formData.link,
       });
@@ -114,8 +114,8 @@ export default function NewLessonForm() {
         <Input type="checkbox" name="grammar" id="grammar" />
         <Label htmlFor="grammar">Grammar</Label>
       </Fieldset>
-      <BlockLabel htmlFor="">Document link</BlockLabel>
-      <Input type="url" name="link" id="doc-link" />
+      <BlockLabel htmlFor="doc-link">Document link</BlockLabel>
+      <InputURL type="text" name="link" id="doc-link" />
       <Input
         type="checkbox"
         name="addresource"
@@ -180,4 +180,10 @@ const Legend = styled.legend`
 
 const Button = styled.button`
   margin: 1.5rem auto 0.4rem;
+`;
+
+const InputURL = styled.input`
+  display: block;
+  width: 100%;
+  margin-bottom: 1.2rem;
 `;
