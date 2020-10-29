@@ -7,12 +7,14 @@ import HomePage from './pages/HomePage/HomePage.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
 import Loading from './components/Loading/Loading.jsx';
+import { db } from './connection';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [userEmail, setUserEmail] = React.useState('');
   const [userUID, setUserUID] = React.useState('');
+  const [tutorData, setTutorData] = React.useState('');
 
   React.useEffect(() => {
     const checkFirebaseUser = auth().onAuthStateChanged((user) => {
@@ -21,6 +23,11 @@ function App() {
         setLoggedIn(true);
         setUserEmail(user.email);
         setUserUID(user.uid);
+        db.collection('tutors')
+          .doc(user.uid)
+          .get()
+          .then((doc) => setTutorData(doc.data()));
+        console.log(tutorData);
       } else {
         // No user is signed in.
         setIsLoading(false);
@@ -29,6 +36,10 @@ function App() {
     });
     return () => checkFirebaseUser();
   }, []);
+
+  React.useEffect(() => {
+    console.log(tutorData);
+  }, [tutorData]);
 
   if (isLoading) return <Loading />;
   if (!loggedIn) return <LoginPage />;
@@ -39,7 +50,7 @@ function App() {
         <Route path="/" exact>
           <>
             <Sidebar />
-            <HomePage />
+            <HomePage tutorData={tutorData} />
           </>
         </Route>
         <Route path="/home">
