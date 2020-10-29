@@ -56,3 +56,9 @@ export const CloseButton = styled.button`
   right: 1rem;
   top: 1rem;
 `;
+
+export const InputURL = styled.input`
+  display: block;
+  width: 100%;
+  margin-bottom: 1.2rem;
+`;
