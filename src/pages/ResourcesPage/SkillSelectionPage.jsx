@@ -89,13 +89,15 @@ export default function SkillSelectionPage() {
         </div>
         <div>
           {skill && resourceArray ? (
-            <Table columns={tableHeaders} data={resourceArray} />
+            <>
+              <Table columns={tableHeaders} data={resourceArray} />
+              <Button onClick={() => setNewResource(!newResource)}>
+                Add Resource
+              </Button>
+            </>
           ) : (
             <></>
           )}
-          <Button onClick={() => setNewResource(!newResource)}>
-            Add Resource
-          </Button>
         </div>
         {newResource ? (
           <NewResourceForm setNewResource={setNewResource} />
