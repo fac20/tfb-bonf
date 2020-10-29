@@ -4,11 +4,19 @@ import styled from 'styled-components';
 import Table from './../../components/Table/Table';
 import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
 
-const LessonsPage = () => {
+const LessonsPage = ({
+  tutorData,
+  upcominglessonsArray,
+  setupcomingLessonsArray,
+  pastlessonsArray,
+  setpastLessonsArray,
+  newLesson,
+  setNewLesson,
+}) => {
   //need useState because re-rendering of component will make variable declaration empty
-  const [upcominglessonsArray, setupcomingLessonsArray] = React.useState('');
-  const [pastlessonsArray, setpastLessonsArray] = React.useState('');
-  const [newLesson, setNewLesson] = React.useState(false);
+  // const [upcominglessonsArray, setupcomingLessonsArray] = React.useState('');
+  // const [pastlessonsArray, setpastLessonsArray] = React.useState('');
+  // const [newLesson, setNewLesson] = React.useState(false);
 
   const thisfunction = () => {
     let lessons = [];
@@ -96,8 +104,6 @@ const LessonsPage = () => {
     ],
     []
   );
-
-  //must split array somehow (using date) into upcoming and past
 
   return (
     <main>

@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage/HomePage.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
 import Loading from './components/Loading/Loading.jsx';
+import Links from './pages/LinksPage/LinksPage.jsx';
 import { db } from './connection';
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
   const [userEmail, setUserEmail] = React.useState('');
   const [userUID, setUserUID] = React.useState('');
   const [tutorData, setTutorData] = React.useState('');
+  const [upcominglessonsArray, setupcomingLessonsArray] = React.useState('');
+  const [pastlessonsArray, setpastLessonsArray] = React.useState('');
+  const [newLesson, setNewLesson] = React.useState(false);
 
   React.useEffect(() => {
     const checkFirebaseUser = auth().onAuthStateChanged((user) => {
@@ -55,7 +59,15 @@ function App() {
         </Route>
         <Route path="/home">
           <Sidebar />
-          <HomePage />
+          <HomePage
+            tutorData={tutorData}
+            upcominglessonsArray={upcominglessonsArray}
+            setupcomingLessonsArray={setupcomingLessonsArray}
+            pastlessonsArray={pastlessonsArray}
+            setpastLessonsArray={setpastLessonsArray}
+            newLesson={newLesson}
+            setNewLesson={setNewLesson}
+          />
         </Route>
         <Route path="/resources" exact>
           <Sidebar />
@@ -71,7 +83,20 @@ function App() {
         </Route>
         <Route path="/lessons">
           <Sidebar />
-          <LessonsPage>{(userEmail, userUID)}</LessonsPage>
+          <LessonsPage
+            upcominglessonsArray={upcominglessonsArray}
+            setupcomingLessonsArray={setupcomingLessonsArray}
+            pastlessonsArray={pastlessonsArray}
+            setpastLessonsArray={setpastLessonsArray}
+            newLesson={newLesson}
+            setNewLesson={setNewLesson}
+          >
+            {(userEmail, userUID)}
+          </LessonsPage>
+        </Route>
+        <Route path="/links">
+          <Sidebar />
+          <Links></Links>
         </Route>
       </Switch>
     </BrowserRouter>
