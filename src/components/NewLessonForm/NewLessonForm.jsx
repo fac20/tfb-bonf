@@ -1,8 +1,17 @@
 import React from 'react';
 import { db } from '../../connection.js';
-import styled from 'styled-components';
+import {
+  BlockLabel,
+  Button,
+  CloseButton,
+  Fieldset,
+  Form,
+  Input,
+  Label,
+  Legend,
+} from './NewLessonForm.style';
 
-export default function NewLessonForm() {
+export default function NewLessonForm({ setNewLesson }) {
   const [formData, setFormData] = React.useState({});
   const [addToResource, setAddToResource] = React.useState(false);
   const [resourceChecked, setResourceChecked] = React.useState(false);
@@ -40,7 +49,6 @@ export default function NewLessonForm() {
       isFirstRun.current = false;
       return;
     }
-    console.log(formData);
     //potential issue, can't allow tutors to write student's name.
     // when we have 2 people with same names, .where is going to find 2 documnets. How do we solve it?
 
@@ -55,7 +63,6 @@ export default function NewLessonForm() {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          // console.log(doc.data())
           ID = doc.id;
         });
       })
@@ -78,10 +85,12 @@ export default function NewLessonForm() {
         link: formData.link,
       });
     }
-  }, [formData, addToResource]); //would this make it submit twice?
+    setNewLesson(false);
+  }, [formData, addToResource, setNewLesson]); //would this make it submit twice?
 
   return (
     <Form onSubmit={submitData}>
+      <CloseButton onClick={() => setNewLesson(false)}>&times;</CloseButton>
       <BlockLabel htmlFor="student">Student</BlockLabel>
       <Input type="text" name="student" id="student" />
       <BlockLabel htmlFor="title">Lesson Title</BlockLabel>
@@ -140,44 +149,3 @@ export default function NewLessonForm() {
     </Form>
   );
 }
-
-const Form = styled.form`
-  max-width: 100ch;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1.5rem;
-  border-radius: 20px;
-  background-color: rgb(255, 244, 204);
-  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
-  width: fit-content;
-  margin: 4rem auto;
-  padding: 2.3rem 3.5rem;
-  border: 1px solid black;
-  box-shadow: 4px 4px 0 black;
-`;
-
-const Label = styled.label`
-  display: inline-block;
-  margin: auto 1rem auto 0.2rem;
-`;
-
-const Input = styled.input`
-  display: inline-block;
-`;
-
-const BlockLabel = styled.label`
-  margin: 1.5rem auto 0.4rem;
-  font-weight: 600;
-`;
-
-const Fieldset = styled.fieldset`
-  margin: 1.5rem auto 0.4rem;
-`;
-
-const Legend = styled.legend`
-  font-weight: 600;
-`;
-
-const Button = styled.button`
-  margin: 1.5rem auto 0.4rem;
-`;

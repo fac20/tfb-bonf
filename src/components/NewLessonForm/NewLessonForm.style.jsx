@@ -9,6 +9,7 @@ export const Form = styled.form`
   max-width: 40ch;
   padding: 1rem 2rem;
   position: fixed;
+  top: 2rem;
   width: fit-content;
   z-index: 1;
 `;
