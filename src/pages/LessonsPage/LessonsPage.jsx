@@ -1,11 +1,13 @@
 import React from 'react';
 import { db } from './../../connection';
-import Table from './../../components/Table/Table';
 import styled from 'styled-components';
+import Table from './../../components/Table/Table';
+import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
 
 const LessonsPage = () => {
   //need useState because re-rendering of component will make variable declaration empty
   const [lessonsArray, setLessonsArray] = React.useState('');
+  const [newLesson, setNewLesson] = React.useState(false);
 
   const thisfunction = () => {
     let lessons = [];
@@ -89,17 +91,12 @@ const LessonsPage = () => {
         ) : (
           <></>
         )}
-        <Button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.href = '/new-lesson-form';
-          }}
-        >
+        <Button type="button" onClick={() => setNewLesson(!newLesson)}>
           Add New Lesson
         </Button>
         <Button type="button">Add Homework</Button>
         <h3>Past</h3>
+        {newLesson ? <NewLessonForm setNewLesson={setNewLesson} /> : <></>}
       </LessonsWrapper>
     </main>
   );
