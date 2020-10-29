@@ -3,6 +3,7 @@ import { db } from '../../connection.js';
 import {
   BlockLabel,
   Button,
+  CloseButton,
   Fieldset,
   Form,
   Input,
@@ -10,7 +11,7 @@ import {
   Legend,
 } from './NewResourceForm.style';
 
-export default function NewResourceForm() {
+export default function NewResourceForm({ setNewResource }) {
   const [formData, setFormData] = React.useState({});
 
   const changeData = (event) => {
@@ -56,6 +57,7 @@ export default function NewResourceForm() {
 
   return (
     <Form onSubmit={submitData}>
+      <CloseButton onClick={() => setNewResource(false)}>&times;</CloseButton>
       <BlockLabel htmlFor="title">Lesson Title</BlockLabel>
       <Input type="text" name="title" id="title" />
       <BlockLabel htmlFor="level">Select a level:</BlockLabel>

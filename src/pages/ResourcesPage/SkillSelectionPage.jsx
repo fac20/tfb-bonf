@@ -97,7 +97,11 @@ export default function SkillSelectionPage() {
             Add Resource
           </Button>
         </div>
-        {newResource ? <NewResourceForm /> : <></>}
+        {newResource ? (
+          <NewResourceForm setNewResource={setNewResource} />
+        ) : (
+          <></>
+        )}
       </SkillsBox>
     </>
   );

@@ -43,3 +43,14 @@ export const Button = styled.button`
   margin: 1rem auto;
   padding: 1rem 2rem;
 `;
+
+export const CloseButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: #63b6fe;
+  display: inline;
+  font-size: 3em;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+`;
