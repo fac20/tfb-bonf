@@ -7,40 +7,40 @@ import { Button, LessonsWrapper, H2 } from './HomePage.style.jsx';
 
 export default function HomePage({
   tutorData,
-  upcominglessonsArray,
-  setupcomingLessonsArray,
+  upcomingLessonsArray,
+  setUpcomingLessonsArray,
   newLesson,
   setNewLesson,
 }) {
   const [teamMembers, setTeamMembers] = React.useState([]);
   const [studentData, setStudentData] = React.useState({});
 
-  const thisFunction = () => {
-    let lessons = [];
-    return db
-      .collection('students')
-      .doc('sam')
-      .collection('lessons')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          lessons.push(doc.data()); //lessons is an array, with each doc being an object
-        });
-        return lessons.map((lesson) => {
-          let skillsString = '';
-          if (lesson.skills.reading) skillsString = 'Reading ';
-          if (lesson.skills.writing) skillsString += 'Writing ';
-          if (lesson.skills.listening) skillsString += 'Listening ';
-          if (lesson.skills.speaking) skillsString += 'Speaking ';
-          if (lesson.skills.grammar) skillsString += 'Grammar ';
-          return Object.assign(
-            Object.fromEntries([['skillsString', skillsString]]),
-            lesson
-          );
-        });
-      });
-    // .catch((err) => console.error('no lessons yet'));
-  };
+  // const thisFunction = () => {
+  //   let lessons = [];
+  //   return db
+  //     .collection('students')
+  //     .doc('sam')
+  //     .collection('lessons')
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //         lessons.push(doc.data()); //lessons is an array, with each doc being an object
+  //       });
+  //       return lessons.map((lesson) => {
+  //         let skillsString = '';
+  //         if (lesson.skills.reading) skillsString = 'Reading ';
+  //         if (lesson.skills.writing) skillsString += 'Writing ';
+  //         if (lesson.skills.listening) skillsString += 'Listening ';
+  //         if (lesson.skills.speaking) skillsString += 'Speaking ';
+  //         if (lesson.skills.grammar) skillsString += 'Grammar ';
+  //         return Object.assign(
+  //           Object.fromEntries([['skillsString', skillsString]]),
+  //           lesson
+  //         );
+  //       });
+  //     });
+  //   // .catch((err) => console.error('no lessons yet'));
+  // };
 
   // React.useEffect(() => {
   //   thisFunction().then((data) => {
@@ -56,9 +56,9 @@ export default function HomePage({
   //         upcomingArray.push(data[i]);
   //       }
   //     }
-  //     setupcomingLessonsArray(upcomingArray);
+  //     setUpcomingLessonsArray(upcomingArray);
   //   });
-  // }, []);
+  // }, [setUpcomingLessonsArray]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -115,9 +115,11 @@ export default function HomePage({
     }
   }, [tutorData]);
 
-  // React.useEffect(() => {
-  //   console.log('teamMembers', teamMembers);
-  // }, [teamMembers]);
+  // logs to stop ESLint warning
+  // TODO: Delete these logs
+  React.useEffect(() => {
+    console.log('teamMembers:', teamMembers, studentData);
+  }, [teamMembers, studentData]);
 
   return (
     <main>
@@ -125,8 +127,8 @@ export default function HomePage({
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
         <h3>Upcoming</h3>
-        {upcominglessonsArray ? (
-          <Table columns={tableHeaders} data={upcominglessonsArray} />
+        {upcomingLessonsArray ? (
+          <Table columns={tableHeaders} data={upcomingLessonsArray} />
         ) : (
           <></>
         )}
@@ -138,3 +140,4 @@ export default function HomePage({
     </main>
   );
 }
+// onClick=somefunction OR onClick=(e)=> somefunction(e)

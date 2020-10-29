@@ -16,8 +16,8 @@ function App() {
   const [userEmail, setUserEmail] = React.useState('');
   const [userUID, setUserUID] = React.useState('');
   const [tutorData, setTutorData] = React.useState('');
-  const [upcominglessonsArray, setupcomingLessonsArray] = React.useState('');
-  const [pastlessonsArray, setpastLessonsArray] = React.useState('');
+  const [upcomingLessonsArray, setUpcomingLessonsArray] = React.useState('');
+  const [pastLessonsArray, setPastLessonsArray] = React.useState('');
   const [newLesson, setNewLesson] = React.useState(false);
 
   React.useEffect(() => {
@@ -49,20 +49,16 @@ function App() {
         <Route path="/" exact>
           <>
             <Sidebar />
-            <HomePage tutorData={tutorData} />
+            <HomePage
+              tutorData={tutorData}
+              upcomingLessonsArray={upcomingLessonsArray}
+              setUpcomingLessonsArray={setUpcomingLessonsArray}
+              pastLessonsArray={pastLessonsArray}
+              setPastLessonsArray={setPastLessonsArray}
+              newLesson={newLesson}
+              setNewLesson={setNewLesson}
+            />
           </>
-        </Route>
-        <Route path="/home">
-          <Sidebar />
-          <HomePage
-            tutorData={tutorData}
-            upcominglessonsArray={upcominglessonsArray}
-            setupcomingLessonsArray={setupcomingLessonsArray}
-            pastlessonsArray={pastlessonsArray}
-            setpastLessonsArray={setpastLessonsArray}
-            newLesson={newLesson}
-            setNewLesson={setNewLesson}
-          />
         </Route>
         <Route path="/resources" exact>
           <Sidebar />
@@ -79,10 +75,10 @@ function App() {
         <Route path="/lessons">
           <Sidebar />
           <LessonsPage
-            upcominglessonsArray={upcominglessonsArray}
-            setupcomingLessonsArray={setupcomingLessonsArray}
-            pastlessonsArray={pastlessonsArray}
-            setpastLessonsArray={setpastLessonsArray}
+            upcomingLessonsArray={upcomingLessonsArray}
+            setUpcomingLessonsArray={setUpcomingLessonsArray}
+            pastLessonsArray={pastLessonsArray}
+            setPastLessonsArray={setPastLessonsArray}
             newLesson={newLesson}
             setNewLesson={setNewLesson}
           >

@@ -7,23 +7,17 @@ import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
 
 const LessonsPage = ({
   tutorData,
-  upcominglessonsArray,
-  setupcomingLessonsArray,
-  pastlessonsArray,
-  setpastLessonsArray,
+  upcomingLessonsArray,
+  setUpcomingLessonsArray,
+  pastLessonsArray,
+  setPastLessonsArray,
   newLesson,
   setNewLesson,
 }) => {
   //need useState because re-rendering of component will make variable declaration empty
-<<<<<<< HEAD
-  // const [upcominglessonsArray, setupcomingLessonsArray] = React.useState('');
-  // const [pastlessonsArray, setpastLessonsArray] = React.useState('');
+  // const [upcomingLessonsArray, setUpcomingLessonsArray] = React.useState('');
+  // const [pastLessonsArray, setPastLessonsArray] = React.useState('');
   // const [newLesson, setNewLesson] = React.useState(false);
-=======
-  const [upComingLessonsArray, setupComingLessonsArray] = React.useState('');
-  const [pastLessonsArray, setPastLessonsArray] = React.useState('');
-  const [newLesson, setNewLesson] = React.useState(false);
->>>>>>> main
 
   const history = useHistory();
 
@@ -72,10 +66,10 @@ const LessonsPage = ({
           pastArray.push(data[i]);
         }
       }
-      setupComingLessonsArray(upcomingArray);
+      setUpcomingLessonsArray(upcomingArray);
       setPastLessonsArray(pastArray);
     });
-  }, [newLesson]);
+  }, [newLesson, setUpcomingLessonsArray, setPastLessonsArray]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -116,8 +110,8 @@ const LessonsPage = ({
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
         <h3>Upcoming</h3>
-        {upComingLessonsArray ? (
-          <Table columns={tableHeaders} data={upComingLessonsArray} />
+        {upcomingLessonsArray ? (
+          <Table columns={tableHeaders} data={upcomingLessonsArray} />
         ) : (
           <></>
         )}
