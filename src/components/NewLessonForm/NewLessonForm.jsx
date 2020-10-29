@@ -16,6 +16,7 @@ export default function NewLessonForm({ setNewLesson }) {
   const [formData, setFormData] = React.useState({});
   const [addToResource, setAddToResource] = React.useState(false);
   const [resourceChecked, setResourceChecked] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
 
   const changeData = (event) => {
     setFormData({
@@ -86,7 +87,12 @@ export default function NewLessonForm({ setNewLesson }) {
         link: formData.link,
       });
     }
-    setNewLesson(false);
+    setSubmitted(true);
+    // wait for db to update before closing the form and re-rendering the lessons table
+    setTimeout(() => {
+      setSubmitted(false);
+      setNewLesson(false);
+    }, 1000);
   }, [formData, addToResource, setNewLesson]); //would this make it submit twice?
 
   return (
@@ -147,6 +153,7 @@ export default function NewLessonForm({ setNewLesson }) {
         <></>
       )}
       <Button type="submit"> Add New Lesson</Button>
+      {submitted ? <p>Lesson submitted</p> : <></>}
     </Form>
   );
 }

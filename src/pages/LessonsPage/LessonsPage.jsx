@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { db } from './../../connection';
 import styled from 'styled-components';
 import Table from './../../components/Table/Table';
@@ -14,11 +15,19 @@ const LessonsPage = ({
   setNewLesson,
 }) => {
   //need useState because re-rendering of component will make variable declaration empty
+<<<<<<< HEAD
   // const [upcominglessonsArray, setupcomingLessonsArray] = React.useState('');
   // const [pastlessonsArray, setpastLessonsArray] = React.useState('');
   // const [newLesson, setNewLesson] = React.useState(false);
+=======
+  const [upComingLessonsArray, setupComingLessonsArray] = React.useState('');
+  const [pastLessonsArray, setPastLessonsArray] = React.useState('');
+  const [newLesson, setNewLesson] = React.useState(false);
+>>>>>>> main
 
-  const thisfunction = () => {
+  const history = useHistory();
+
+  const thisFunction = () => {
     let lessons = [];
     return db
       .collection('students')
@@ -29,18 +38,18 @@ const LessonsPage = ({
         querySnapshot.forEach((doc) => {
           lessons.push(doc.data()); //lessons is an array, with each doc being an object
         });
-        return lessons.map((elem) => {
+        return lessons.map((lesson) => {
           let skillsString = '';
-          if (elem.skills.reading) skillsString = 'Reading ';
-          if (elem.skills.writing) skillsString += 'Writing ';
-          if (elem.skills.listening) skillsString += 'Listening ';
-          if (elem.skills.speaking) skillsString += 'Speaking ';
-          if (elem.skills.grammar) skillsString += 'Grammar ';
+          if (lesson.skills.reading) skillsString = 'Reading ';
+          if (lesson.skills.writing) skillsString += 'Writing ';
+          if (lesson.skills.listening) skillsString += 'Listening ';
+          if (lesson.skills.speaking) skillsString += 'Speaking ';
+          if (lesson.skills.grammar) skillsString += 'Grammar ';
           // console.log(Object.fromEntries([['skillsString', skillsString]]))
-          // console.log(elem)
+          // console.log(lesson)
           return Object.assign(
             Object.fromEntries([['skillsString', skillsString]]),
-            elem
+            lesson
           );
         });
       });
@@ -48,15 +57,14 @@ const LessonsPage = ({
   };
 
   React.useEffect(() => {
-    thisfunction().then((data) => {
+    thisFunction().then((data) => {
       let upcomingArray = [];
       let pastArray = [];
-      let mydate = new Date();
-      let curr_date = mydate.getDate();
-      let curr_month = mydate.getMonth() + 1;
-      let curr_year = mydate.getFullYear();
+      let myDate = new Date();
+      let curr_date = myDate.getDate();
+      let curr_month = myDate.getMonth() + 1;
+      let curr_year = myDate.getFullYear();
       let today = curr_year + '-' + curr_month + '-' + curr_date;
-      console.log(today);
       for (let i = 0; i < data.length; i++) {
         if (data[i].date >= today) {
           upcomingArray.push(data[i]);
@@ -64,12 +72,10 @@ const LessonsPage = ({
           pastArray.push(data[i]);
         }
       }
-      setupcomingLessonsArray(upcomingArray);
-      setpastLessonsArray(pastArray);
-
-      console.log(Date());
+      setupComingLessonsArray(upcomingArray);
+      setPastLessonsArray(pastArray);
     });
-  }, []);
+  }, [newLesson]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -110,18 +116,25 @@ const LessonsPage = ({
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
         <h3>Upcoming</h3>
-        {upcominglessonsArray ? (
-          <Table columns={tableHeaders} data={upcominglessonsArray} />
+        {upComingLessonsArray ? (
+          <Table columns={tableHeaders} data={upComingLessonsArray} />
         ) : (
           <></>
         )}
         <Button type="button" onClick={() => setNewLesson(!newLesson)}>
           Add New Lesson
         </Button>
-        <Button type="button">Add Homework</Button>
+        <Button
+          type="button"
+          onClick={() => {
+            history.push('/resources');
+          }}
+        >
+          Use existing resource for a new lesson
+        </Button>
         <h3>Past</h3>
-        {pastlessonsArray ? (
-          <Table columns={tableHeaders} data={pastlessonsArray} />
+        {pastLessonsArray ? (
+          <Table columns={tableHeaders} data={pastLessonsArray} />
         ) : (
           <></>
         )}

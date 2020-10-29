@@ -31,7 +31,6 @@ function App() {
           .doc(user.uid)
           .get()
           .then((doc) => setTutorData(doc.data()));
-        console.log(tutorData);
       } else {
         // No user is signed in.
         setIsLoading(false);
@@ -40,10 +39,6 @@ function App() {
     });
     return () => checkFirebaseUser();
   }, []);
-
-  React.useEffect(() => {
-    console.log(tutorData);
-  }, [tutorData]);
 
   if (isLoading) return <Loading />;
   if (!loggedIn) return <LoginPage />;
