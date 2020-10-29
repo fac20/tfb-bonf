@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { db } from './../../connection';
 import styled from 'styled-components';
 import Table from './../../components/Table/Table';
@@ -9,6 +10,8 @@ const LessonsPage = () => {
   const [upComingLessonsArray, setupComingLessonsArray] = React.useState('');
   const [pastLessonsArray, setPastLessonsArray] = React.useState('');
   const [newLesson, setNewLesson] = React.useState(false);
+
+  const history = useHistory();
 
   const thisFunction = () => {
     let lessons = [];
@@ -112,7 +115,14 @@ const LessonsPage = () => {
         <Button type="button" onClick={() => setNewLesson(!newLesson)}>
           Add New Lesson
         </Button>
-        <Button type="button">Use existing resource for a new lesson</Button>
+        <Button
+          type="button"
+          onClick={() => {
+            history.push('/resources');
+          }}
+        >
+          Use existing resource for a new lesson
+        </Button>
         <h3>Past</h3>
         {pastLessonsArray ? (
           <Table columns={tableHeaders} data={pastLessonsArray} />
