@@ -62,7 +62,21 @@ export const Anchor = styled.a`
 
 export const UL = styled.ul`
   list-style-type: none;
-  margin: auto;
+  margin: 2.5rem auto;
+`;
+
+export const LogoImage = styled.img`
+  width: 60px;
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+`;
+
+export const LogoImageOpen = styled.img`
+  width: 50px;
+  position: absolute;
+  top: 0.6rem;
+  left: 2.5rem;
 `;
 
 // @media screen and (max-height: 450px) {

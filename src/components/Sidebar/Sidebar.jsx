@@ -1,5 +1,6 @@
 import React from 'react';
 import logOut from '../../utils/logOut';
+import { logo150 } from '../../assets/images';
 import {
   Anchor,
   CloseButton,
@@ -7,6 +8,8 @@ import {
   Nav,
   OpenButton,
   UL,
+  LogoImage,
+  LogoImageOpen,
 } from './Sidebar.style';
 
 const Sidebar = () => {
@@ -15,8 +18,12 @@ const Sidebar = () => {
   const unfurl = () => setSidebarWidth('13rem');
   return (
     <>
-      <OpenButton onClick={unfurl}>&equiv;</OpenButton>
+      <OpenButton onClick={unfurl}>
+        &equiv;
+        <LogoImageOpen src={logo150} srcSet={`${logo150} 150w`} />
+      </OpenButton>
       <Nav style={{ width: sidebarWidth }}>
+        <LogoImage src={logo150} srcSet={`${logo150} 150w`} />
         <CloseButton onClick={collapse}>&times;</CloseButton>
         <UL>
           <li>
