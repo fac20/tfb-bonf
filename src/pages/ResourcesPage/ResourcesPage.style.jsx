@@ -64,7 +64,7 @@ export const LinkButton = styled.div`
   width: 14rem;
 `;
 
-export const LevelsContainer = styled.div`
+export const PageContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;

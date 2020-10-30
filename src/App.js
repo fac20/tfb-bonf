@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
+import LinksPage from './pages/LinksPage/LinksPage.jsx';
 import Loading from './components/Loading/Loading.jsx';
 import { db } from './connection';
 
@@ -35,7 +36,7 @@ function App() {
       }
     });
     return () => checkFirebaseUser();
-  }, []);
+  }, [tutorData]);
 
   React.useEffect(() => {
     console.log(tutorData);
@@ -72,6 +73,10 @@ function App() {
         <Route path="/lessons">
           <Sidebar />
           <LessonsPage>{(userEmail, userUID)}</LessonsPage>
+        </Route>
+        <Route path="/links">
+          <Sidebar />
+          <LinksPage />
         </Route>
       </Switch>
     </BrowserRouter>
