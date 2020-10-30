@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar/Sidebar.jsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
 import LinksPage from './pages/LinksPage/LinksPage.jsx';
 import Loading from './components/Loading/Loading.jsx';
+import Links from './pages/LinksPage/LinksPage.jsx';
 import { db } from './connection';
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
   const [userEmail, setUserEmail] = React.useState('');
   const [userUID, setUserUID] = React.useState('');
   const [tutorData, setTutorData] = React.useState('');
+  const [upcomingLessonsArray, setUpcomingLessonsArray] = React.useState('');
+  const [pastLessonsArray, setPastLessonsArray] = React.useState('');
+  const [newLesson, setNewLesson] = React.useState(false);
 
   React.useEffect(() => {
     const checkFirebaseUser = auth().onAuthStateChanged((user) => {
@@ -28,7 +32,6 @@ function App() {
           .doc(user.uid)
           .get()
           .then((doc) => setTutorData(doc.data()));
-        console.log(tutorData);
       } else {
         // No user is signed in.
         setIsLoading(false);
@@ -36,10 +39,6 @@ function App() {
       }
     });
     return () => checkFirebaseUser();
-  }, [tutorData]);
-
-  React.useEffect(() => {
-    console.log(tutorData);
   }, [tutorData]);
 
   if (isLoading) return <Loading />;
@@ -51,12 +50,16 @@ function App() {
         <Route path="/" exact>
           <>
             <Sidebar />
-            <HomePage tutorData={tutorData} />
+            <HomePage
+              tutorData={tutorData}
+              upcomingLessonsArray={upcomingLessonsArray}
+              setUpcomingLessonsArray={setUpcomingLessonsArray}
+              pastLessonsArray={pastLessonsArray}
+              setPastLessonsArray={setPastLessonsArray}
+              newLesson={newLesson}
+              setNewLesson={setNewLesson}
+            />
           </>
-        </Route>
-        <Route path="/home">
-          <Sidebar />
-          <HomePage />
         </Route>
         <Route path="/resources" exact>
           <Sidebar />
@@ -72,7 +75,21 @@ function App() {
         </Route>
         <Route path="/lessons">
           <Sidebar />
-          <LessonsPage>{(userEmail, userUID)}</LessonsPage>
+          <LessonsPage
+            tutorData={tutorData}
+            upcomingLessonsArray={upcomingLessonsArray}
+            setUpcomingLessonsArray={setUpcomingLessonsArray}
+            pastLessonsArray={pastLessonsArray}
+            setPastLessonsArray={setPastLessonsArray}
+            newLesson={newLesson}
+            setNewLesson={setNewLesson}
+          >
+            {(userEmail, userUID)}
+          </LessonsPage>
+        </Route>
+        <Route path="/links">
+          <Sidebar />
+          <Links></Links>
         </Route>
         <Route path="/links">
           <Sidebar />
