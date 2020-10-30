@@ -39,7 +39,7 @@ function App() {
       }
     });
     return () => checkFirebaseUser();
-  }, [tutorData]);
+  }, []);
 
   if (isLoading) return <Loading />;
   if (!loggedIn) return <LoginPage />;
