@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   LevelBox,
   LinkButton,
-  LevelsContainer,
+  PageContainer,
   TitleBox,
 } from './ResourcesPage.style';
 
@@ -13,7 +13,7 @@ export default function LevelSelectionPage() {
       <TitleBox>
         <h2>What level is your student at?</h2>
       </TitleBox>
-      <LevelsContainer>
+      <PageContainer>
         <LevelBox style={{ background: '#fff4cc' }}>
           Beginner
           <LinkButton>
@@ -41,7 +41,7 @@ export default function LevelSelectionPage() {
             <Link to="/resources/c2">C2 - proficient</Link>
           </LinkButton>
         </LevelBox>
-      </LevelsContainer>
+      </PageContainer>
     </>
   );
 }

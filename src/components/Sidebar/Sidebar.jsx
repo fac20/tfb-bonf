@@ -23,9 +23,11 @@ const Sidebar = () => {
         <LogoImageOpen src={logo150} srcSet={`${logo150} 150w`} />
       </OpenButton>
       <Nav style={{ width: sidebarWidth }}>
-        <LogoImage src={logo150} srcSet={`${logo150} 150w`} />
         <CloseButton onClick={collapse}>&times;</CloseButton>
         <UL>
+          <li>
+            <LogoImage src={logo150} srcSet={`${logo150} 150w`} />
+          </li>
           <li>
             <Anchor href="/">Home</Anchor>
           </li>
@@ -35,13 +37,12 @@ const Sidebar = () => {
           <li>
             <Anchor href="/resources">Resources</Anchor>
           </li>
-          <li>
+          {/* <li>
             <Anchor>Calendar</Anchor>
-            {/* <Anchor href="/calendar">Calendar</Anchor> */}
-          </li>
+            <Anchor href="/calendar">Calendar</Anchor>
+          </li> */}
           <li>
-            <Anchor>Useful Links</Anchor>
-            {/* <Anchor href="/links">Useful Links</Anchor> */}
+            <Anchor href="/links">Useful Links</Anchor>
           </li>
           <li>
             <LogoutButton onClick={logOut}>Logout</LogoutButton>

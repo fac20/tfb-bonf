@@ -9,7 +9,7 @@ export const LogoutButton = styled.button`
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   font-weight: 1000;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   max-width: 10rem;
   padding: 0.5rem 1rem;
   &:hover {
@@ -62,21 +62,22 @@ export const Anchor = styled.a`
 
 export const UL = styled.ul`
   list-style-type: none;
-  margin: 2.5rem auto;
+  margin: 0 auto;
 `;
 
 export const LogoImage = styled.img`
-  width: 60px;
-  position: absolute;
+  max-width: 5rem;
+  margin-bottom: 0.5rem;
+  /* position: absolute;
   top: 0.7rem;
-  left: 0.7rem;
+  left: 0.7rem; */
 `;
 
 export const LogoImageOpen = styled.img`
   width: 50px;
   position: absolute;
   top: 0.6rem;
-  left: 2.5rem;
+  left: 3rem;
 `;
 
 // @media screen and (max-height: 450px) {

@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx';
 import HomePage from './pages/HomePage/HomePage.jsx';
 import Sidebar from './components/Sidebar/Sidebar.jsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
+import LinksPage from './pages/LinksPage/LinksPage.jsx';
 import Loading from './components/Loading/Loading.jsx';
 import Links from './pages/LinksPage/LinksPage.jsx';
 import { db } from './connection';
@@ -38,7 +39,7 @@ function App() {
       }
     });
     return () => checkFirebaseUser();
-  }, []);
+  }, [tutorData]);
 
   if (isLoading) return <Loading />;
   if (!loggedIn) return <LoginPage />;
@@ -89,6 +90,10 @@ function App() {
         <Route path="/links">
           <Sidebar />
           <Links></Links>
+        </Route>
+        <Route path="/links">
+          <Sidebar />
+          <LinksPage />
         </Route>
       </Switch>
     </BrowserRouter>
