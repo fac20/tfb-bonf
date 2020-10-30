@@ -75,6 +75,7 @@ function App() {
         <Route path="/lessons">
           <Sidebar />
           <LessonsPage
+            tutorData={tutorData}
             upcomingLessonsArray={upcomingLessonsArray}
             setUpcomingLessonsArray={setUpcomingLessonsArray}
             pastLessonsArray={pastLessonsArray}

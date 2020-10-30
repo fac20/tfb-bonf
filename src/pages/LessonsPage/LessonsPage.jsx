@@ -21,36 +21,35 @@ const LessonsPage = ({
 
   const history = useHistory();
 
-  const thisFunction = () => {
-    let lessons = [];
-    return db
-      .collection('students')
-      .doc(tutorData.student.id)
-      .collection('lessons')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          lessons.push(doc.data()); //lessons is an array, with each doc being an object
-        });
-        return lessons.map((lesson) => {
-          let skillsString = '';
-          if (lesson.skills.reading) skillsString = 'Reading ';
-          if (lesson.skills.writing) skillsString += 'Writing ';
-          if (lesson.skills.listening) skillsString += 'Listening ';
-          if (lesson.skills.speaking) skillsString += 'Speaking ';
-          if (lesson.skills.grammar) skillsString += 'Grammar ';
-          // console.log(Object.fromEntries([['skillsString', skillsString]]))
-          // console.log(lesson)
-          return Object.assign(
-            Object.fromEntries([['skillsString', skillsString]]),
-            lesson
-          );
-        });
-      });
-    // .catch((err) => console.error('no lessons yet'));
-  };
-
   React.useEffect(() => {
+    const thisFunction = () => {
+      let lessons = [];
+      return db
+        .collection('students')
+        .doc(tutorData.student.id)
+        .collection('lessons')
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            lessons.push(doc.data()); //lessons is an array, with each doc being an object
+          });
+          return lessons.map((lesson) => {
+            let skillsString = '';
+            if (lesson.skills.reading) skillsString = 'Reading ';
+            if (lesson.skills.writing) skillsString += 'Writing ';
+            if (lesson.skills.listening) skillsString += 'Listening ';
+            if (lesson.skills.speaking) skillsString += 'Speaking ';
+            if (lesson.skills.grammar) skillsString += 'Grammar ';
+            // console.log(Object.fromEntries([['skillsString', skillsString]]))
+            // console.log(lesson)
+            return Object.assign(
+              Object.fromEntries([['skillsString', skillsString]]),
+              lesson
+            );
+          });
+        });
+      // .catch((err) => console.error('no lessons yet'));
+    };
     if (tutorData) {
       thisFunction().then((data) => {
         let upcomingArray = [];
