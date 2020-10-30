@@ -54,6 +54,7 @@ export const Anchor = styled.a`
   padding: 0.5rem 0;
   text-decoration: none;
   transition: 0.3s;
+  width: max-content;
   /* When you mouse over the navigation links, change their color */
   &:hover {
     color: white;
