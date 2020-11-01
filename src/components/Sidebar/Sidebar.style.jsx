@@ -18,11 +18,11 @@ export const LogoutButton = styled.button`
 `;
 
 export const Nav = styled.nav`
-  background-color: #111; /* Black*/
-  height: 100%; /* 100% Full-height */
+  background-color: black;
+  height: 100%;
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 1rem; /* Place content 60px from the top */
+  padding-top: 1rem;
   position: fixed; /* Stay in place */
   top: 0;
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
@@ -44,6 +44,7 @@ export const CloseButton = styled.button`
 export const OpenButton = styled(CloseButton)`
   color: hsl(0, 0%, 20%);
   left: 1rem;
+  position: fixed;
 `;
 
 /* The sidebar links */
@@ -55,7 +56,6 @@ export const Anchor = styled.a`
   text-decoration: none;
   transition: 0.3s;
   width: max-content;
-  /* When you mouse over the navigation links, change their color */
   &:hover {
     color: hsl(208, 99%, 69%);
   }
@@ -63,7 +63,6 @@ export const Anchor = styled.a`
 
 export const UL = styled.ul`
   list-style-type: none;
-  /* margin: 0 auto; */
   position: absolute;
   right: 2rem;
 `;
@@ -71,23 +70,12 @@ export const UL = styled.ul`
 export const LogoImage = styled.img`
   max-width: 5rem;
   margin-bottom: 0.5rem;
-  /* position: absolute;
-  top: 0.7rem;
-  left: 0.7rem; */
 `;
 
-export const LogoImageOpen = styled.img`
-  width: 50px;
-  position: absolute;
-  top: 0.6rem;
-  left: 3rem;
+export const LogoImageClose = styled.img`
+  position: fixed;
+  left: 4rem;
+  height: 3rem;
+  margin: 0.5rem;
+  z-index: -1;
 `;
-
-// @media screen and (max-height: 450px) {
-//   nav {
-//     padding-top: 15px;
-//   }
-//   nav a {
-//     font-size: 18px;
-//   }
-// }
