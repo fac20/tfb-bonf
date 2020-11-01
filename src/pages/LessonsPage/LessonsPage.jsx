@@ -102,6 +102,7 @@ const LessonsPage = ({
       },
       {
         Header: 'Tutor',
+        accessor: 'tutor',
       },
     ],
     []
