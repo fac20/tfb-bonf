@@ -12,53 +12,52 @@ export default function HomePage({
   newLesson,
   setNewLesson,
 }) {
-  const [teamMembers, setTeamMembers] = React.useState([]);
-  const [studentData, setStudentData] = React.useState({});
+  // const [teamMembers, setTeamMembers] = React.useState([]);
+  // const [studentData, setStudentData] = React.useState({});
 
-  // const thisFunction = () => {
-  //   let lessons = [];
-  //   return db
-  //     .collection('students')
-  //     .doc('sam')
-  //     .collection('lessons')
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       querySnapshot.forEach((doc) => {
-  //         lessons.push(doc.data()); //lessons is an array, with each doc being an object
-  //       });
-  //       return lessons.map((lesson) => {
-  //         let skillsString = '';
-  //         if (lesson.skills.reading) skillsString = 'Reading ';
-  //         if (lesson.skills.writing) skillsString += 'Writing ';
-  //         if (lesson.skills.listening) skillsString += 'Listening ';
-  //         if (lesson.skills.speaking) skillsString += 'Speaking ';
-  //         if (lesson.skills.grammar) skillsString += 'Grammar ';
-  //         return Object.assign(
-  //           Object.fromEntries([['skillsString', skillsString]]),
-  //           lesson
-  //         );
-  //       });
-  //     });
-  //   // .catch((err) => console.error('no lessons yet'));
-  // };
+  const getLessons = () => {
+    let lessons = [];
+    return db
+      .collection('students')
+      .doc('sam')
+      .collection('lessons')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          lessons.push(doc.data()); //lessons is an array, with each doc being an object
+        });
+        return lessons.map((lesson) => {
+          let skillsString = '';
+          if (lesson.skills.reading) skillsString = 'Reading ';
+          if (lesson.skills.writing) skillsString += 'Writing ';
+          if (lesson.skills.listening) skillsString += 'Listening ';
+          if (lesson.skills.speaking) skillsString += 'Speaking ';
+          if (lesson.skills.grammar) skillsString += 'Grammar ';
+          return Object.assign(
+            Object.fromEntries([['skillsString', skillsString]]),
+            lesson
+          );
+        });
+      })
+      .catch((err) => console.error(err, 'no lessons yet'));
+  };
 
-  // React.useEffect(() => {
-  //   thisFunction().then((data) => {
-  //     let upcomingArray = [];
-  //     let mydate = new Date();
-  //     let curr_date = mydate.getDate();
-  //     let curr_month = mydate.getMonth() + 1;
-  //     let curr_year = mydate.getFullYear();
-  //     let today = curr_year + '-' + curr_month + '-' + curr_date;
-  //     console.log(today);
-  //     for (let i = 0; i < data.length; i++) {
-  //       if (data[i].date >= today) {
-  //         upcomingArray.push(data[i]);
-  //       }
-  //     }
-  //     setUpcomingLessonsArray(upcomingArray);
-  //   });
-  // }, [setUpcomingLessonsArray]);
+  React.useEffect(() => {
+    getLessons().then((data) => {
+      let upcomingArray = [];
+      let myDate = new Date();
+      let curDate = myDate.getDate();
+      let curMonth = myDate.getMonth() + 1;
+      let curYear = myDate.getFullYear();
+      let today = curYear + '-' + curMonth + '-' + curDate;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].date >= today) {
+          upcomingArray.push(data[i]);
+        }
+      }
+      setUpcomingLessonsArray(upcomingArray);
+    });
+  }, [setUpcomingLessonsArray]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -94,7 +93,7 @@ export default function HomePage({
     []
   );
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     let tutorsArray = [];
     let studentObj = {};
     if (tutorData) {
@@ -113,13 +112,13 @@ export default function HomePage({
       setTeamMembers(tutorsArray);
       setStudentData(studentObj);
     }
-  }, [tutorData]);
+  }, [tutorData]);*/
 
   // logs to stop ESLint warning
   // TODO: Delete these logs
-  React.useEffect(() => {
-    console.log('teamMembers:', teamMembers, studentData);
-  }, [teamMembers, studentData]);
+  // React.useEffect(() => {
+  //   console.log('teamMembers:', teamMembers, studentData);
+  // }, [teamMembers, studentData]);
 
   return (
     <main>
