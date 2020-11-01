@@ -18,10 +18,12 @@ export default function NewLessonForm({ tutorData, setNewLesson }) {
   const [resourceChecked, setResourceChecked] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
 
+  console.log(tutorData.student_name);
+
   const changeData = (event) => {
     setFormData({
-      tutor: '', //get value from tutorData state
-      student: event.target.elements.student.value, //need to change to get value from tutorData
+      tutor: tutorData.name,
+      student: tutorData.student_name, //need to change to get value from tutorData
       title: event.target.elements.title.value,
       date: event.target.elements.date.value,
       time: event.target.elements.time.value,
@@ -70,6 +72,7 @@ export default function NewLessonForm({ tutorData, setNewLesson }) {
       })
       .then(() => {
         db.collection('students').doc(ID).collection('lessons').doc().set({
+          tutor: formData.tutor,
           date: formData.date,
           time: formData.time,
           title: formData.title,
@@ -99,7 +102,12 @@ export default function NewLessonForm({ tutorData, setNewLesson }) {
     <Form onSubmit={submitData}>
       <CloseButton onClick={() => setNewLesson(false)}>&times;</CloseButton>
       <BlockLabel htmlFor="student">Student</BlockLabel>
-      <Input type="text" name="student" id="student" />
+      <Input
+        type="text"
+        name="student"
+        id="student"
+        value={tutorData.student_name}
+      />
       <BlockLabel htmlFor="title">Lesson Title</BlockLabel>
       <Input type="text" name="title" id="title" />
       <BlockLabel htmlFor="date">Date</BlockLabel>
