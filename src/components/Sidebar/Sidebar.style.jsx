@@ -14,6 +14,7 @@ export const LogoutButton = styled.button`
   padding: 0.5rem 1rem;
   &:hover {
     background: hsl(208, 99%, 69%);
+    cursor: pointer;
   }
 `;
 
@@ -39,11 +40,17 @@ export const CloseButton = styled.button`
   position: absolute;
   right: 1rem;
   top: 0;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const OpenButton = styled(CloseButton)`
   color: hsl(0, 0%, 20%);
   left: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 /* The sidebar links */
