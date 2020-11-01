@@ -22,7 +22,7 @@ export const Nav = styled.nav`
   height: 100%; /* 100% Full-height */
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 4rem; /* Place content 60px from the top */
+  padding-top: 1rem; /* Place content 60px from the top */
   position: fixed; /* Stay in place */
   top: 0;
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
@@ -48,7 +48,7 @@ export const OpenButton = styled(CloseButton)`
 
 /* The sidebar links */
 export const Anchor = styled.a`
-  color: hsl(0, 0%, 50.6%);
+  color: white;
   display: block;
   font-size: 1.5em;
   padding: 0.5rem 0;
@@ -57,13 +57,15 @@ export const Anchor = styled.a`
   width: max-content;
   /* When you mouse over the navigation links, change their color */
   &:hover {
-    color: white;
+    color: hsl(208, 99%, 69%);
   }
 `;
 
 export const UL = styled.ul`
   list-style-type: none;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  position: absolute;
+  right: 2rem;
 `;
 
 export const LogoImage = styled.img`
