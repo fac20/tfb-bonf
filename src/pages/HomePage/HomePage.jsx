@@ -12,8 +12,8 @@ export default function HomePage({
   newLesson,
   setNewLesson,
 }) {
-  // const [teamMembers, setTeamMembers] = React.useState([]);
-  // const [studentData, setStudentData] = React.useState({});
+  const [teamMembers, setTeamMembers] = React.useState([]);
+  const [studentData, setStudentData] = React.useState({});
 
   const getLessons = () => {
     let lessons = [];
@@ -93,32 +93,44 @@ export default function HomePage({
     []
   );
 
-  /*React.useEffect(() => {
-    let tutorsArray = [];
-    let studentObj = {};
+  const getTutor = (name) => {
+    return db
+      .collection('tutors')
+      .where('name', '==', name)
+      .get()
+      .then((snap) => snap.forEach((tutor) => tutor.data()))
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  //TODO: Get effect to return/update tutorsArray state after promises fulfil
+  React.useEffect(() => {
+    let tutorsArr = [];
+    let studentObj;
     if (tutorData) {
-      db.doc(tutorData.student.path)
+      db.collection('students')
+        .where('name', '==', tutorData.student_name)
         .get()
-        .then((doc) => {
-          studentObj = doc.data();
-          doc.data().tutors.forEach((tutor) => {
-            db.doc(tutor.path)
-              .get()
-              .then((data) => {
-                tutorsArray.push(data.data());
-              });
+        .then((snap) => {
+          snap.forEach((doc) => {
+            studentObj = doc.data();
+            setStudentData(studentObj);
+            studentObj.tutors.forEach((tutor) => {
+              tutorsArr.push(getTutor(tutor));
+            });
+            setTeamMembers(tutorsArr);
           });
-        });
-      setTeamMembers(tutorsArray);
-      setStudentData(studentObj);
+        })
+        .catch((err) => console.error(err));
     }
-  }, [tutorData]);*/
+  }, [tutorData]);
 
   // logs to stop ESLint warning
   // TODO: Delete these logs
-  // React.useEffect(() => {
-  //   console.log('teamMembers:', teamMembers, studentData);
-  // }, [teamMembers, studentData]);
+  React.useEffect(() => {
+    console.log('teamMembers:', teamMembers, 'studentData:', studentData);
+  }, [teamMembers, studentData]);
 
   return (
     <main>
