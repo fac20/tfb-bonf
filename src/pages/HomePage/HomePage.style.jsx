@@ -10,6 +10,19 @@ export const LessonsWrapper = styled.div`
   width: fit-content;
 `;
 
+export const TutorTeamWrapper = styled(LessonsWrapper)`
+  background-color: #fff4cc;
+`;
+
+export const TutorArticle = styled.article`
+  border-radius: 20px;
+  border: 1px solid black;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  width: fit-content;
+  background-color: hsl(172, 87%, 91%);
+`;
+
 export const H2 = styled.h2`
   text-align: center;
 `;

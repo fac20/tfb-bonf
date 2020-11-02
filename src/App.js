@@ -1,15 +1,14 @@
-import React from 'react';
-import LessonsPage from './pages/LessonsPage/LessonsPage.jsx';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { auth } from './connection.js';
-import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { db } from './connection';
 import HomePage from './pages/HomePage/HomePage.jsx';
-import Sidebar from './components/Sidebar/Sidebar.jsx';
-import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
+import LessonsPage from './pages/LessonsPage/LessonsPage.jsx';
 import LinksPage from './pages/LinksPage/LinksPage.jsx';
 import Loading from './components/Loading/Loading.jsx';
-import Links from './pages/LinksPage/LinksPage.jsx';
-import { db } from './connection';
+import LoginPage from './pages/LoginPage/LoginPage.jsx';
+import React from 'react';
+import ResourcesPage from './pages/ResourcesPage/ResourcesPage.jsx';
+import Sidebar from './components/Sidebar/Sidebar.jsx';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -86,10 +85,6 @@ function App() {
           >
             {(userEmail, userUID)}
           </LessonsPage>
-        </Route>
-        <Route path="/links">
-          <Sidebar />
-          <Links></Links>
         </Route>
         <Route path="/links">
           <Sidebar />

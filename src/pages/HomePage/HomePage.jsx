@@ -1,16 +1,21 @@
 import React from 'react';
-// import findTutorWithEmail from './../../utils/findTutorWithEmail';
 import { db } from '../../connection.js';
 import Table from './../../components/Table/Table';
 import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
-import { Button, LessonsWrapper, H2 } from './HomePage.style.jsx';
+import {
+  Button,
+  H2,
+  LessonsWrapper,
+  TutorTeamWrapper,
+  TutorArticle,
+} from './HomePage.style.jsx';
 
 export default function HomePage({
-  tutorData,
-  upcomingLessonsArray,
-  setUpcomingLessonsArray,
   newLesson,
   setNewLesson,
+  setUpcomingLessonsArray,
+  tutorData,
+  upcomingLessonsArray,
 }) {
   const [teamMembers, setTeamMembers] = React.useState([]);
   const [studentData, setStudentData] = React.useState({});
@@ -19,7 +24,7 @@ export default function HomePage({
     let lessons = [];
     return db
       .collection('students')
-      .doc('sam')
+      .doc('e8EPetXKPE0oekiWLeRF')
       .collection('lessons')
       .get()
       .then((querySnapshot) => {
@@ -57,7 +62,7 @@ export default function HomePage({
       }
       setUpcomingLessonsArray(upcomingArray);
     });
-  }, [setUpcomingLessonsArray]);
+  }, [setUpcomingLessonsArray, tutorData]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -88,25 +93,30 @@ export default function HomePage({
       },
       {
         Header: 'Tutor',
+        accessor: 'tutor',
       },
     ],
     []
   );
 
-  const getTutor = (name) => {
+  const getTutors = (student) => {
+    let tutorsArr = [];
     return db
       .collection('tutors')
-      .where('name', '==', name)
+      .where('student_name', '==', student)
       .get()
-      .then((snap) => snap.forEach((tutor) => tutor.data()))
+      .then((snap) =>
+        snap.forEach((tutor) => {
+          tutorsArr.push(tutor.data());
+        })
+      )
+      .then(() => tutorsArr)
       .catch((err) => {
         console.error(err);
       });
   };
 
-  //TODO: Get effect to return/update tutorsArray state after promises fulfil
   React.useEffect(() => {
-    let tutorsArr = [];
     let studentObj;
     if (tutorData) {
       db.collection('students')
@@ -116,25 +126,26 @@ export default function HomePage({
           snap.forEach((doc) => {
             studentObj = doc.data();
             setStudentData(studentObj);
-            studentObj.tutors.forEach((tutor) => {
-              tutorsArr.push(getTutor(tutor));
-            });
-            setTeamMembers(tutorsArr);
           });
         })
         .catch((err) => console.error(err));
+      getTutors(tutorData.student_name).then((team) => setTeamMembers(team));
     }
   }, [tutorData]);
 
   // logs to stop ESLint warning
   // TODO: Delete these logs
   React.useEffect(() => {
-    console.log('teamMembers:', teamMembers, 'studentData:', studentData);
-  }, [teamMembers, studentData]);
+    console.log('studentData:', studentData);
+  }, [studentData]);
+  // React.useEffect(() => {
+  //   console.log('teamMembers 1:', teamMembers);
+  // }, [teamMembers]);
 
   return (
     <main>
       <h1>Home Page</h1>
+
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
         <h3>Upcoming</h3>
@@ -152,7 +163,18 @@ export default function HomePage({
           <></>
         )}
       </LessonsWrapper>
+      <H2>Team Members</H2>
+      <TutorTeamWrapper>
+        {teamMembers[0] ? (
+          teamMembers.map((tutor, i) => (
+            <TutorArticle key={i}>
+              <p>{tutor.name}</p>
+            </TutorArticle>
+          ))
+        ) : (
+          <></>
+        )}
+      </TutorTeamWrapper>
     </main>
   );
 }
-// onClick=somefunction OR onClick=(e)=> somefunction(e)
