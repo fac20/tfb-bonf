@@ -18,8 +18,6 @@ export default function NewLessonForm({ tutorData, setNewLesson }) {
   const [resourceChecked, setResourceChecked] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
 
-  console.log(tutorData.student_name);
-
   const changeData = (event) => {
     setFormData({
       tutor: tutorData.name,
