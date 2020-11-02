@@ -9,19 +9,20 @@ import {
   OpenButton,
   UL,
   LogoImage,
-  LogoImageOpen,
+  LogoImageClose,
 } from './Sidebar.style';
 
 const Sidebar = () => {
-  const [sidebarWidth, setSidebarWidth] = React.useState('13rem');
+  const [sidebarWidth, setSidebarWidth] = React.useState(
+    window.innerWidth < 1200 ? '0' : '13rem'
+  );
   const collapse = () => setSidebarWidth('0');
   const unfurl = () => setSidebarWidth('13rem');
+
   return (
     <>
-      <OpenButton onClick={unfurl}>
-        &equiv;
-        <LogoImageOpen src={logo150} srcSet={`${logo150} 150w`} />
-      </OpenButton>
+      <OpenButton onClick={unfurl}>&equiv;</OpenButton>
+      <LogoImageClose src={logo150} srcSet={`${logo150} 150w`} />
       <Nav style={{ width: sidebarWidth }}>
         <CloseButton onClick={collapse}>&times;</CloseButton>
         <UL>
