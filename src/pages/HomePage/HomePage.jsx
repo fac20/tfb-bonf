@@ -51,8 +51,12 @@ export default function HomePage({
     getLessons().then((data) => {
       let upcomingArray = [];
       let myDate = new Date();
-      let curDate = myDate.getDate();
-      let curMonth = myDate.getMonth() + 1;
+      let firstDate = myDate.getDate();
+      let curDate;
+      firstDate < 10 ? (curDate = '0' + firstDate) : (curDate = firstDate);
+      let firstMonth = myDate.getMonth() + 1;
+      let curMonth;
+      firstMonth < 10 ? (curMonth = '0' + firstMonth) : (curMonth = firstMonth);
       let curYear = myDate.getFullYear();
       let today = curYear + '-' + curMonth + '-' + curDate;
       for (let i = 0; i < data.length; i++) {
