@@ -4,8 +4,12 @@ import Table from './../../components/Table/Table';
 import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
 import {
   Button,
+  H1,
   H2,
+  H3,
   LessonsWrapper,
+  FlexRow,
+  StudentWrapper,
   TutorTeamWrapper,
   TutorArticle,
 } from './HomePage.style.jsx';
@@ -120,39 +124,37 @@ export default function HomePage({
       });
   };
 
+  const getStudent = (student) => {
+    let studentObj = {};
+    return db
+      .collection('students')
+      .where('name', '==', student)
+      .get()
+      .then((snap) => {
+        snap.forEach((doc) => {
+          studentObj = doc.data();
+        });
+      })
+      .then(() => studentObj)
+      .catch((err) => console.error(err));
+  };
+
   React.useEffect(() => {
-    let studentObj;
-    if (tutorData) {
-      db.collection('students')
-        .where('name', '==', tutorData.student_name)
-        .get()
-        .then((snap) => {
-          snap.forEach((doc) => {
-            studentObj = doc.data();
-            setStudentData(studentObj);
-          });
-        })
-        .catch((err) => console.error(err));
+    if (tutorData.student_name) {
+      getStudent(tutorData.student_name).then((student) =>
+        setStudentData(student)
+      );
       getTutors(tutorData.student_name).then((team) => setTeamMembers(team));
     }
   }, [tutorData]);
 
-  // logs to stop ESLint warning
-  // TODO: Delete these logs
-  React.useEffect(() => {
-    console.log('studentData:', studentData);
-  }, [studentData]);
-  // React.useEffect(() => {
-  //   console.log('teamMembers 1:', teamMembers);
-  // }, [teamMembers]);
-
   return (
     <main>
-      <h1>Home Page</h1>
+      <H1>Home Page</H1>
 
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
-        <h3>Upcoming</h3>
+        <H3>Upcoming</H3>
         {upcomingLessonsArray ? (
           <Table columns={tableHeaders} data={upcomingLessonsArray} />
         ) : (
@@ -167,18 +169,41 @@ export default function HomePage({
           <></>
         )}
       </LessonsWrapper>
-      <H2>Team Members</H2>
-      <TutorTeamWrapper>
-        {teamMembers[0] ? (
-          teamMembers.map((tutor, i) => (
-            <TutorArticle key={i}>
-              <p>{tutor.name}</p>
-            </TutorArticle>
-          ))
-        ) : (
-          <></>
-        )}
-      </TutorTeamWrapper>
+
+      <FlexRow>
+        <div>
+          <H2>Student</H2>
+          <StudentWrapper>
+            {studentData ? (
+              <>
+                <H3>{studentData.name}</H3>
+                <p>email: {studentData.email}</p>
+                <p>phone: {studentData.phone}</p>
+              </>
+            ) : (
+              <></>
+            )}
+          </StudentWrapper>
+        </div>
+        <div>
+          <H2>Team Members</H2>
+          <TutorTeamWrapper>
+            {teamMembers[0] ? (
+              teamMembers.map((tutor, i) => (
+                <>
+                  <H3>{tutor.name}</H3>
+                  <TutorArticle key={i}>
+                    <p>email: {tutor.email}</p>
+                    <p>phone: {tutor.phone}</p>
+                  </TutorArticle>
+                </>
+              ))
+            ) : (
+              <></>
+            )}
+          </TutorTeamWrapper>
+        </div>
+      </FlexRow>
     </main>
   );
 }
