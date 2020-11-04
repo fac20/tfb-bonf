@@ -81,7 +81,7 @@ export default function NewResourceForm({ setNewResource }) {
         <Label htmlFor="grammar">Grammar</Label>
       </Fieldset>
       <BlockLabel htmlFor="">Document link</BlockLabel>
-      <Input type="url" name="link" id="doc-link" />
+      <Input type="text" name="link" id="doc-link" />
       <Button type="submit"> Add resource to collection</Button>
     </Form>
   );

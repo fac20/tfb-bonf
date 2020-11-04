@@ -55,8 +55,12 @@ export default function HomePage({
     getLessons().then((data) => {
       let upcomingArray = [];
       let myDate = new Date();
-      let curDate = myDate.getDate();
-      let curMonth = myDate.getMonth() + 1;
+      let firstDate = myDate.getDate();
+      let curDate;
+      firstDate < 10 ? (curDate = '0' + firstDate) : (curDate = firstDate);
+      let firstMonth = myDate.getMonth() + 1;
+      let curMonth;
+      firstMonth < 10 ? (curMonth = '0' + firstMonth) : (curMonth = firstMonth);
       let curYear = myDate.getFullYear();
       let today = curYear + '-' + curMonth + '-' + curDate;
       for (let i = 0; i < data.length; i++) {
@@ -173,8 +177,8 @@ export default function HomePage({
             {studentData ? (
               <>
                 <H3>{studentData.name}</H3>
-                <p>email: {studentData.email}</p>
-                <p>phone: {studentData.phone}</p>
+                <p>Email: {studentData.email}</p>
+                <p>Phone: {studentData.phone}</p>
               </>
             ) : (
               <></>
@@ -189,8 +193,8 @@ export default function HomePage({
                 <>
                   <H3>{tutor.name}</H3>
                   <TutorArticle key={i}>
-                    <p>email: {tutor.email}</p>
-                    <p>phone: {tutor.phone}</p>
+                    <p>Email: {tutor.email}</p>
+                    <p>Phone: {tutor.phone}</p>
                   </TutorArticle>
                 </>
               ))

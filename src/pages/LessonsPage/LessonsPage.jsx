@@ -57,12 +57,14 @@ const LessonsPage = ({
         let myDate = new Date();
         let first_date = myDate.getDate();
         let curr_date;
-        if (first_date < 10) {
-          curr_date = '0' + first_date;
-        } else {
-          curr_date = first_date;
-        }
-        let curr_month = myDate.getMonth() + 1;
+        first_date < 10
+          ? (curr_date = '0' + first_date)
+          : (curr_date = first_date);
+        let first_month = myDate.getMonth() + 1;
+        let curr_month;
+        first_month < 10
+          ? (curr_month = '0' + first_month)
+          : (curr_month = first_month);
         let curr_year = myDate.getFullYear();
         let today = curr_year + '-' + curr_month + '-' + curr_date;
         for (let i = 0; i < data.length; i++) {
