@@ -5,7 +5,7 @@ export const LessonsWrapper = styled.div`
   border-radius: 20px;
   border: 1px solid black;
   box-shadow: 4px 4px 0 black;
-  margin: auto;
+  margin: 0 auto 2.5rem;
   padding: 1rem 2rem;
   width: fit-content;
 `;
@@ -38,7 +38,7 @@ export const H2 = styled.h2`
 
 export const H3 = styled.h3`
   text-align: left;
-  margin: 0;
+  margin: 25px auto 10px;
   padding: 0;
 `;
 

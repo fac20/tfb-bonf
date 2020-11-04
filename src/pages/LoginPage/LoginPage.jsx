@@ -80,13 +80,14 @@ const LoginPage = () => {
 export default LoginPage;
 
 const Main = styled.main`
-  font-family: 'Montserrat', sans-serif;
+  align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
+  font-family: 'Montserrat', sans-serif;
   height: 100vh;
+  justify-content: center;
+  max-width: 100%;
 `;
 
 const Section = styled.section`
@@ -98,54 +99,54 @@ const GreenSquare = styled.div`
   height: min-content;
 `;
 const WhiteSquare = styled.div`
-  background-color: #fff;
-  height: fit-content;
-  width: fit-content;
-  -webkit-box-shadow: 8px 0px 43px -22px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 8px 0px 43px -22px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 8px 0px 43px -22px rgba(0, 0, 0, 0.75);
+  background-color: #fff;
   box-shadow: 8px 0px 43px -22px rgba(0, 0, 0, 0.75);
-  position: relative;
+  height: fit-content;
   left: 10%;
+  position: relative;
   top: 25px;
+  width: fit-content;
 `;
 
 const LoginForm = styled.form`
+  align-items: center;
+  background: hsl(115, 55%, 68%);
+  border-radius: 20px;
+  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  box-shadow: 0 5px 25px hsla(0, 0%, 0%, 0.5);
-  background: hsl(115, 55%, 68%);
 `;
 
 const Title = styled.h1`
-  margin-bottom: 45px;
-  line-height: 1em;
-  padding-left: 10px;
   border-left: 5px solid hsl(208, 99%, 69%);
   font-size: 40px;
+  line-height: 1em;
+  margin-bottom: 45px;
+  padding-left: 10px;
 `;
 const Label = styled.label`
-  position: absolute;
-  top: 1px;
+  display: inline-block;
   left: 1px;
   padding: 10px;
-  display: inline-block;
-  transition: 0.5s;
   pointer-events: none;
+  position: absolute;
+  top: 1px;
+  transition: 0.5s;
 `;
 const FormInput = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  border: 2px solid #111;
   background: hsl(140, 100%, 100%);
-  padding: 10px;
   border-radius: 4px;
+  border: 2px solid #111;
   box-sizing: border-box;
   font-size: 16px;
+  left: 0;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  width: 100%;
   &:focus ~ ${Label} {
     transform: translateX(-10px) translateY(-32px);
     font-size: 12px;
@@ -161,26 +162,26 @@ const FormInput = styled.input`
 `;
 
 const InputBox = styled.div`
+  display: flex;
+  height: 46px;
+  justify-content: center;
+  margin-bottom: 35px;
   position: relative;
   width: 300px;
-  height: 46px;
-  margin-bottom: 35px;
-  display: flex;
-  justify-content: center;
 `;
 
 const SubmitButton = styled.button`
-  font-family: 'Montserrat', sans-serif;
   background-color: hsl(208, 99%, 69%);
-  color: hsl(140, 100%, 100%);
+  border-radius: 4px;
   border: none;
   box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.5);
-  max-width: 120px;
+  color: hsl(140, 100%, 100%);
   cursor: pointer;
-  padding: 10px;
-  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
   font-size: 25px;
   font-weight: 900;
+  max-width: 120px;
+  padding: 10px;
   &:hover {
     background: #e91563;
   }
