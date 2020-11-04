@@ -15,6 +15,10 @@ export const TutorTeamWrapper = styled(LessonsWrapper)`
   padding: 1.5rem, 1rem, 1rem;
 `;
 
+export const StudentWrapper = styled(TutorTeamWrapper)`
+  background-color: #ffe8e8;
+`;
+
 export const TutorArticle = styled.article`
   border-radius: 20px;
   border: 1px solid black;
@@ -102,4 +106,9 @@ export const LevelsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+`;
+
+export const FlexRow = styled.div`
+  display: flex;
+  justify-content: space-evenly;
 `;
