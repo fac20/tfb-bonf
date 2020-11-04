@@ -4,7 +4,9 @@ import Table from './../../components/Table/Table';
 import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
 import {
   Button,
+  H1,
   H2,
+  H3,
   LessonsWrapper,
   TutorTeamWrapper,
   TutorArticle,
@@ -138,17 +140,17 @@ export default function HomePage({
   React.useEffect(() => {
     console.log('studentData:', studentData);
   }, [studentData]);
-  // React.useEffect(() => {
-  //   console.log('teamMembers 1:', teamMembers);
-  // }, [teamMembers]);
+  React.useEffect(() => {
+    console.log('teamMembers 1:', teamMembers);
+  }, [teamMembers]);
 
   return (
     <main>
-      <h1>Home Page</h1>
+      <H1>Home Page</H1>
 
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
-        <h3>Upcoming</h3>
+        <H3>Upcoming</H3>
         {upcomingLessonsArray ? (
           <Table columns={tableHeaders} data={upcomingLessonsArray} />
         ) : (
@@ -167,9 +169,13 @@ export default function HomePage({
       <TutorTeamWrapper>
         {teamMembers[0] ? (
           teamMembers.map((tutor, i) => (
-            <TutorArticle key={i}>
-              <p>{tutor.name}</p>
-            </TutorArticle>
+            <>
+              <H3>{tutor.name}</H3>
+              <TutorArticle key={i}>
+                <p>email: {tutor.email}</p>
+                <p>phone: {tutor.phone}</p>
+              </TutorArticle>
+            </>
           ))
         ) : (
           <></>
