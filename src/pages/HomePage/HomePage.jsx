@@ -1,16 +1,25 @@
 import React from 'react';
-// import findTutorWithEmail from './../../utils/findTutorWithEmail';
 import { db } from '../../connection.js';
 import Table from './../../components/Table/Table';
 import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
-import { Button, LessonsWrapper, H2 } from './HomePage.style.jsx';
+import {
+  Button,
+  H1,
+  H2,
+  H3,
+  LessonsWrapper,
+  FlexRow,
+  StudentWrapper,
+  TutorTeamWrapper,
+  TutorArticle,
+} from './HomePage.style.jsx';
 
 export default function HomePage({
-  tutorData,
-  upcomingLessonsArray,
-  setUpcomingLessonsArray,
   newLesson,
   setNewLesson,
+  setUpcomingLessonsArray,
+  tutorData,
+  upcomingLessonsArray,
 }) {
   const [teamMembers, setTeamMembers] = React.useState([]);
   const [studentData, setStudentData] = React.useState({});
@@ -19,7 +28,7 @@ export default function HomePage({
     let lessons = [];
     return db
       .collection('students')
-      .doc('sam')
+      .doc('e8EPetXKPE0oekiWLeRF')
       .collection('lessons')
       .get()
       .then((querySnapshot) => {
@@ -57,7 +66,7 @@ export default function HomePage({
       }
       setUpcomingLessonsArray(upcomingArray);
     });
-  }, [setUpcomingLessonsArray]);
+  }, [setUpcomingLessonsArray, tutorData]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -88,56 +97,60 @@ export default function HomePage({
       },
       {
         Header: 'Tutor',
+        accessor: 'tutor',
       },
     ],
     []
   );
 
-  const getTutor = (name) => {
+  const getTutors = (student) => {
+    let tutorsArr = [];
     return db
       .collection('tutors')
-      .where('name', '==', name)
+      .where('student_name', '==', student)
       .get()
-      .then((snap) => snap.forEach((tutor) => tutor.data()))
+      .then((snap) =>
+        snap.forEach((tutor) => {
+          tutorsArr.push(tutor.data());
+        })
+      )
+      .then(() => tutorsArr)
       .catch((err) => {
         console.error(err);
       });
   };
 
-  //TODO: Get effect to return/update tutorsArray state after promises fulfil
+  const getStudent = (student) => {
+    let studentObj = {};
+    return db
+      .collection('students')
+      .where('name', '==', student)
+      .get()
+      .then((snap) => {
+        snap.forEach((doc) => {
+          studentObj = doc.data();
+        });
+      })
+      .then(() => studentObj)
+      .catch((err) => console.error(err));
+  };
+
   React.useEffect(() => {
-    let tutorsArr = [];
-    let studentObj;
-    if (tutorData) {
-      db.collection('students')
-        .where('name', '==', tutorData.student_name)
-        .get()
-        .then((snap) => {
-          snap.forEach((doc) => {
-            studentObj = doc.data();
-            setStudentData(studentObj);
-            studentObj.tutors.forEach((tutor) => {
-              tutorsArr.push(getTutor(tutor));
-            });
-            setTeamMembers(tutorsArr);
-          });
-        })
-        .catch((err) => console.error(err));
+    if (tutorData.student_name) {
+      getStudent(tutorData.student_name).then((student) =>
+        setStudentData(student)
+      );
+      getTutors(tutorData.student_name).then((team) => setTeamMembers(team));
     }
   }, [tutorData]);
 
-  // logs to stop ESLint warning
-  // TODO: Delete these logs
-  React.useEffect(() => {
-    console.log('teamMembers:', teamMembers, 'studentData:', studentData);
-  }, [teamMembers, studentData]);
-
   return (
     <main>
-      <h1>Home Page</h1>
+      <H1>Home Page</H1>
+
       <H2>Tutee's Lessons</H2>
       <LessonsWrapper>
-        <h3>Upcoming</h3>
+        <H3>Upcoming</H3>
         {upcomingLessonsArray ? (
           <Table columns={tableHeaders} data={upcomingLessonsArray} />
         ) : (
@@ -152,7 +165,41 @@ export default function HomePage({
           <></>
         )}
       </LessonsWrapper>
+
+      <FlexRow>
+        <div>
+          <H2>Student</H2>
+          <StudentWrapper>
+            {studentData ? (
+              <>
+                <H3>{studentData.name}</H3>
+                <p>email: {studentData.email}</p>
+                <p>phone: {studentData.phone}</p>
+              </>
+            ) : (
+              <></>
+            )}
+          </StudentWrapper>
+        </div>
+        <div>
+          <H2>Team Members</H2>
+          <TutorTeamWrapper>
+            {teamMembers[0] ? (
+              teamMembers.map((tutor, i) => (
+                <>
+                  <H3>{tutor.name}</H3>
+                  <TutorArticle key={i}>
+                    <p>email: {tutor.email}</p>
+                    <p>phone: {tutor.phone}</p>
+                  </TutorArticle>
+                </>
+              ))
+            ) : (
+              <></>
+            )}
+          </TutorTeamWrapper>
+        </div>
+      </FlexRow>
     </main>
   );
 }
-// onClick=somefunction OR onClick=(e)=> somefunction(e)

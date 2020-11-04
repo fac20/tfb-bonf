@@ -29,8 +29,8 @@ const LessonsPage = ({
         .doc(tutorData.student.id)
         .collection('lessons')
         .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
+        .then((snap) => {
+          snap.forEach((doc) => {
             lessons.push(doc.data()); //lessons is an array, with each doc being an object
           });
           return lessons.map((lesson) => {
@@ -55,7 +55,13 @@ const LessonsPage = ({
         let upcomingArray = [];
         let pastArray = [];
         let myDate = new Date();
-        let curr_date = myDate.getDate();
+        let first_date = myDate.getDate();
+        let curr_date;
+        if (first_date < 10) {
+          curr_date = '0' + first_date;
+        } else {
+          curr_date = first_date;
+        }
         let curr_month = myDate.getMonth() + 1;
         let curr_year = myDate.getFullYear();
         let today = curr_year + '-' + curr_month + '-' + curr_date;

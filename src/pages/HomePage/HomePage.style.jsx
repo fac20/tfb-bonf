@@ -10,8 +10,36 @@ export const LessonsWrapper = styled.div`
   width: fit-content;
 `;
 
+export const TutorTeamWrapper = styled(LessonsWrapper)`
+  background-color: #fff4cc;
+  padding: 1.5rem, 1rem, 1rem;
+`;
+
+export const StudentWrapper = styled(TutorTeamWrapper)`
+  background-color: #ffe8e8;
+`;
+
+export const TutorArticle = styled.article`
+  border-radius: 20px;
+  border: 1px solid black;
+  margin: 0 auto 1rem;
+  padding: 0 1.5rem;
+  width: fit-content;
+  background-color: hsl(172, 87%, 91%);
+`;
+
+export const H1 = styled.h1`
+  text-align: center;
+`;
+
 export const H2 = styled.h2`
   text-align: center;
+`;
+
+export const H3 = styled.h3`
+  text-align: left;
+  margin: 0;
+  padding: 0;
 `;
 
 export const BackButton = styled.button`
@@ -32,10 +60,6 @@ export const Button = styled.button`
   font-weight: 800;
   margin: 1rem auto;
   padding: 0.5rem 1rem;
-`;
-
-export const H1 = styled.h1`
-  color: #63b6fe;
 `;
 
 export const LevelBox = styled.div`
@@ -82,4 +106,9 @@ export const LevelsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+`;
+
+export const FlexRow = styled.div`
+  display: flex;
+  justify-content: space-evenly;
 `;
