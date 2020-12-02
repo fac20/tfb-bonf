@@ -1,8 +1,9 @@
 import React from 'react';
-import { db } from '../../connection.js';
 import Table from './../../components/Table/Table';
 import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
 import getLessons from '../../utils/getLessons.js';
+import getStudent from '../../utils/getStudent.js';
+import getTutors from '../../utils/getTutors.js';
 import {
   Button,
   H1,
@@ -84,39 +85,6 @@ export default function HomePage({
     ],
     []
   );
-
-  const getTutors = (student) => {
-    let tutorsArr = [];
-    return db
-      .collection('tutors')
-      .where('student_name', '==', student)
-      .get()
-      .then((snap) =>
-        snap.forEach((tutor) => {
-          tutorsArr.push(tutor.data());
-        })
-      )
-      .then(() => tutorsArr)
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const getStudent = (student) => {
-    let studentObj = {};
-    return db
-      .collection('students')
-      .where('name', '==', student)
-      .get()
-      .then((snap) => {
-        snap.forEach((doc) => {
-          studentObj = doc.data();
-          studentObj.studentID = doc.id;
-        });
-      })
-      .then(() => studentObj)
-      .catch((err) => console.error(err));
-  };
 
   React.useEffect(() => {
     if (tutorData.student_name) {
