@@ -15,6 +15,7 @@ import {
   TutorTeamWrapper,
   TutorArticle,
 } from './HomePage.style.jsx';
+import { db } from '../../connection.js';
 
 export default function HomePage({
   newLesson,
@@ -27,6 +28,7 @@ export default function HomePage({
   const [studentData, setStudentData] = React.useState({});
 
   React.useEffect(() => {
+    console.log('db', db);
     if (studentData.studentID) {
       getLessons(studentData).then((data) => {
         let upcomingArray = [];
