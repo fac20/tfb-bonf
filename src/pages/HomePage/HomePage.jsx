@@ -1,7 +1,9 @@
 import React from 'react';
-import { db } from '../../connection.js';
 import Table from './../../components/Table/Table';
 import NewLessonForm from '../../components/NewLessonForm/NewLessonForm';
+import getLessons from '../../utils/getLessons.js';
+import getStudent from '../../utils/getStudent.js';
+import getTutors from '../../utils/getTutors.js';
 import {
   Button,
   H1,
@@ -13,6 +15,7 @@ import {
   TutorTeamWrapper,
   TutorArticle,
 } from './HomePage.style.jsx';
+import { db } from '../../connection.js';
 
 export default function HomePage({
   newLesson,
@@ -24,53 +27,31 @@ export default function HomePage({
   const [teamMembers, setTeamMembers] = React.useState([]);
   const [studentData, setStudentData] = React.useState({});
 
-  const getLessons = () => {
-    let lessons = [];
-    return db
-      .collection('students')
-      .doc('e8EPetXKPE0oekiWLeRF')
-      .collection('lessons')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          lessons.push(doc.data()); //lessons is an array, with each doc being an object
-        });
-        return lessons.map((lesson) => {
-          let skillsString = '';
-          if (lesson.skills.reading) skillsString = 'Reading ';
-          if (lesson.skills.writing) skillsString += 'Writing ';
-          if (lesson.skills.listening) skillsString += 'Listening ';
-          if (lesson.skills.speaking) skillsString += 'Speaking ';
-          if (lesson.skills.grammar) skillsString += 'Grammar ';
-          return Object.assign(
-            Object.fromEntries([['skillsString', skillsString]]),
-            lesson
-          );
-        });
-      })
-      .catch((err) => console.error(err, 'no lessons yet'));
-  };
-
   React.useEffect(() => {
-    getLessons().then((data) => {
-      let upcomingArray = [];
-      let myDate = new Date();
-      let firstDate = myDate.getDate();
-      let curDate;
-      firstDate < 10 ? (curDate = '0' + firstDate) : (curDate = firstDate);
-      let firstMonth = myDate.getMonth() + 1;
-      let curMonth;
-      firstMonth < 10 ? (curMonth = '0' + firstMonth) : (curMonth = firstMonth);
-      let curYear = myDate.getFullYear();
-      let today = curYear + '-' + curMonth + '-' + curDate;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].date >= today) {
-          upcomingArray.push(data[i]);
+    console.log('db', db);
+    if (studentData.studentID) {
+      getLessons(studentData).then((data) => {
+        let upcomingArray = [];
+        let myDate = new Date();
+        let firstDate = myDate.getDate();
+        let curDate;
+        firstDate < 10 ? (curDate = '0' + firstDate) : (curDate = firstDate);
+        let firstMonth = myDate.getMonth() + 1;
+        let curMonth;
+        firstMonth < 10
+          ? (curMonth = '0' + firstMonth)
+          : (curMonth = firstMonth);
+        let curYear = myDate.getFullYear();
+        let today = curYear + '-' + curMonth + '-' + curDate;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].date >= today) {
+            upcomingArray.push(data[i]);
+          }
         }
-      }
-      setUpcomingLessonsArray(upcomingArray);
-    });
-  }, [setUpcomingLessonsArray, tutorData]);
+        setUpcomingLessonsArray(upcomingArray);
+      });
+    }
+  }, [setUpcomingLessonsArray, tutorData, studentData]);
 
   const tableHeaders = React.useMemo(
     () => [
@@ -106,38 +87,6 @@ export default function HomePage({
     ],
     []
   );
-
-  const getTutors = (student) => {
-    let tutorsArr = [];
-    return db
-      .collection('tutors')
-      .where('student_name', '==', student)
-      .get()
-      .then((snap) =>
-        snap.forEach((tutor) => {
-          tutorsArr.push(tutor.data());
-        })
-      )
-      .then(() => tutorsArr)
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const getStudent = (student) => {
-    let studentObj = {};
-    return db
-      .collection('students')
-      .where('name', '==', student)
-      .get()
-      .then((snap) => {
-        snap.forEach((doc) => {
-          studentObj = doc.data();
-        });
-      })
-      .then(() => studentObj)
-      .catch((err) => console.error(err));
-  };
 
   React.useEffect(() => {
     if (tutorData.student_name) {
