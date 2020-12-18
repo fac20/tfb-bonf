@@ -11,7 +11,9 @@ export const Form = styled.form`
   position: fixed;
   top: 2rem;
   width: fit-content;
+  height: 30rem;
   z-index: 1;
+  overflow-y: scroll;
 `;
 
 export const Label = styled.label`
